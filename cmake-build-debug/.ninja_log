@@ -1,0 +1,7 @@
+# ninja log v5
+31	700	7114856268955342	build.ninja	8d4002c1e650b711
+1	711	7114851342534315	CMakeFiles/EstructuraDeDatos.dir/main.cpp.obj	b7ade0548c5e3ae
+712	1034	7114851345718526	EstructuraDeDatos.exe	a9b91774c77f310b
+5	316	7114856620894955	CMakeFiles/EstructuraDeDatos.dir/Categorias.cpp.obj	53656fcc701285c
+11	318	7114856620904976	CMakeFiles/EstructuraDeDatos.dir/Equipos.cpp.obj	f389c5a565440c76
+318	480	7114856622464842	EstructuraDeDatos.exe	ec5a97c0136597ac
