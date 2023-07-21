@@ -9,14 +9,19 @@ using namespace std;
 class Categorias
 {
 private:
-    Categorias* inicio;
-    Categorias* final;
+    Categoria* inicio;
+    Categoria* final;
 
 public:
     Categorias();
-    int Agregar(string nombre);
-    int Retirar(string nombreCategoria);
-    int Modificar(string nombreCategoria);
+
+    Categorias(Categorias *inicio, Categorias *final);
+
+    Categorias(Categoria *inicio, Categoria *final);
+
+    void Agregar(string nombre);
+    void Retirar(string nombreCategoria);
+    void Modificar(string nombreCategoria);
     Categoria Consultar(string nombreCategoria);
     Categoria Inicio();
     Categoria Final();
