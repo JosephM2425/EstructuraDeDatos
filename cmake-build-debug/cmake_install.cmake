@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Nueva carpeta/EstructuraDeDatos
+# Install script for directory: C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Código/EstructuraDeDatos
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Nueva carpeta/EstructuraDeDatos/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Código/EstructuraDeDatos/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

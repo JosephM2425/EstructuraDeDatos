@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Nueva carpeta/EstructuraDeDatos/cmake-build-debug"
+			"value" : "c:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/C\u00f3digo/EstructuraDeDatos/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -575,7 +575,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Nueva carpeta/EstructuraDeDatos/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/C\u00f3digo/EstructuraDeDatos/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -647,7 +647,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Nueva carpeta/EstructuraDeDatos"
+			"value" : "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/C\u00f3digo/EstructuraDeDatos"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1263,7 +1263,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Nueva carpeta/EstructuraDeDatos/cmake-build-debug"
+			"value" : "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/C\u00f3digo/EstructuraDeDatos/cmake-build-debug"
 		},
 		{
 			"name" : "EstructuraDeDatos_IS_TOP_LEVEL",
@@ -1287,7 +1287,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Nueva carpeta/EstructuraDeDatos"
+			"value" : "C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/C\u00f3digo/EstructuraDeDatos"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

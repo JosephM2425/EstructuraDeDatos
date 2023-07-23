@@ -13,7 +13,7 @@ public:
     string nombre;
     int annio;
     string descripcion;
-    Categoria categoria;
+    string categoria;
     int maxPh;
     int minPh;
     bool estado;
