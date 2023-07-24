@@ -14,19 +14,15 @@ private:
 
 public:
     Categorias();
-
-    Categorias(Categorias *inicio, Categorias *final);
-
     Categorias(Categoria *inicio, Categoria *final);
 
-    void Agregar(string nombre);
-    void Retirar(string nombreCategoria);
-    void Modificar(string categoria, string nombreCategoria);
+    int Agregar(string nombre);
+    int Retirar(string nombreCategoria);
     Categoria Consultar(string nombreCategoria);
     Categoria Inicio();
     Categoria Final();
-    Categorias listarCategoriaAsc();
-    Categorias listarCategoriaDesc();
+    void Imprimir();
+    Categorias ListarCategorias(int orden);
 };
 
 #endif //ESTRUCTURADEDATOS_CATEGORIAS_H

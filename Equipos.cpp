@@ -5,7 +5,7 @@
 #include <regex>
 #include "Equipo.h"
 #include "Equipos.h"
-#include "Categoria.h"
+
 
 
 using namespace std;
@@ -259,7 +259,8 @@ int Equipos::Retirar(std::string nombreEquipo) {
 
         }while(!recorridoCompleto && inicio != final);
         return 0;
-    }}
+    }
+}
 
 
 
