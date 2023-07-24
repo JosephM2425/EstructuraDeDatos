@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
+#include <cstring>
+#include <algorithm>
+#include <regex>
 #include "Equipo.h"
 #include "Equipos.h"
 #include "Categoria.h"
-#include <cstring>
-#include <algorithm>
+
 
 using namespace std;
 
@@ -13,6 +15,110 @@ Equipos::Equipos()
 {
     inicio = nullptr;
     final = nullptr;
+}
+
+int Equipos::AgregarAnnio(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh, bool estado, int cantSolicitudes) {
+    Equipo *nuevo = new Equipo();
+    nuevo->nombre = nombre;
+    nuevo->annio = annio;
+    nuevo->descripcion = descripcion;
+    nuevo->categoria = categoria;
+    nuevo->maxPh = maxPh;
+    nuevo->minPh = minPh;
+    nuevo->estado = estado;
+    nuevo->cantSolicitudes = cantSolicitudes;
+    nuevo->anterior = nullptr;
+    nuevo->siguiente = nullptr;
+
+    //Lista vacia
+    if (inicio == nullptr) {
+        inicio = nuevo;
+        inicio->siguiente = inicio;
+        inicio->anterior = final;
+        final = inicio;
+        return 1;
+    }
+        //Lista con nodos
+    else {
+        //Recorro la lista comparando los annios de los equipos
+        Equipo *actual = inicio;
+        bool recorridoCompleto = false;
+
+        do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            //Si el annio del equipo nuevo es menor al annio del equipo actual
+            if (nuevo->annio < actual->annio) {
+                //Si el equipo actual es el inicio
+                if (actual == inicio) {
+                    nuevo->siguiente = actual;
+                    actual->anterior = nuevo;
+                    inicio = nuevo;
+                    inicio->anterior = final;
+                    final->siguiente = inicio;
+                } else {
+                    nuevo->siguiente = actual;
+                    nuevo->anterior = actual->anterior;
+                    actual->anterior->siguiente = nuevo;
+                    actual->anterior = nuevo;
+                }
+                return 1;
+            } else if (nuevo->annio > actual->annio) {
+                //Si el equipo actual es el final
+                if (actual == final) {
+                    nuevo->anterior = actual;
+                    actual->siguiente = nuevo;
+                    nuevo->siguiente = inicio;
+                    final = nuevo;
+                    inicio->anterior = final;
+                    return 1;
+                }
+            } else {
+                //Comparo los nombres de los equipos
+                //Nombre del equipo nuevo
+                string nombreNuevoStr = nuevo->nombre;
+                transform(nombreNuevoStr.begin(), nombreNuevoStr.end(), nombreNuevoStr.begin(), ::tolower);
+                char *nombreNuevo = nombreNuevoStr.data();
+
+                //Nombre del equipo actual
+                string nombreActualStr = actual->nombre;
+                transform(nombreActualStr.begin(), nombreActualStr.end(), nombreActualStr.begin(), ::tolower);
+                char *nombreActual = nombreActualStr.data();
+
+                //Si el nombre del equipo nuevo es menor al nombre del equipo actual
+                if (strcmp(nombreNuevo, nombreActual) < 0) {
+                    //Si el equipo actual es el inicio
+                    if (actual == inicio) {
+                        nuevo->siguiente = actual;
+                        actual->anterior = nuevo;
+                        inicio = nuevo;
+                        inicio->anterior = final;
+                        final->siguiente = inicio;
+                    } else {
+                        nuevo->siguiente = actual;
+                        nuevo->anterior = actual->anterior;
+                        actual->anterior->siguiente = nuevo;
+                        actual->anterior = nuevo;
+                    }
+                    return 1;
+                } else if (strcmp(nombreNuevo, nombreActual) > 0) {
+                    //Si el equipo actual es el final
+                    if (actual == final) {
+                        nuevo->anterior = actual;
+                        actual->siguiente = nuevo;
+                        nuevo->siguiente = inicio;
+                        final = nuevo;
+                        inicio->anterior = final;
+                        return 1;
+                    }
+                }
+            }
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+        return 0;
+    }
 }
 
 int Equipos::Agregar(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh)
@@ -46,8 +152,15 @@ int Equipos::Agregar(string nombre, int annio, string descripcion, string catego
         string nombreNuevoStr = nuevo->nombre;
         transform(nombreNuevoStr.begin(), nombreNuevoStr.end(), nombreNuevoStr.begin(), ::tolower);
         char* nombreNuevo = nombreNuevoStr.data();
+        bool recorridoCompleto = false;
+
         do
         {
+            if (actual == final)
+            {
+                recorridoCompleto = true;
+            }
+
             string nombreActualStr = actual->nombre;
             transform(nombreActualStr.begin(), nombreActualStr.end(), nombreActualStr.begin(), ::tolower);
             char* nombreActual = nombreActualStr.data();
@@ -90,7 +203,7 @@ int Equipos::Agregar(string nombre, int annio, string descripcion, string catego
                 {
                     return 2;
                 }
-        } while (actual != inicio);
+        } while (!recorridoCompleto && inicio != final);
     }
     return 0;
 }
@@ -107,7 +220,14 @@ int Equipos::Retirar(std::string nombreEquipo) {
     }
     else {
         Equipo* actual = inicio;
+        bool recorridoCompleto = false;
+
         do{
+            if (actual == final)
+            {
+                recorridoCompleto = true;
+            }
+
             char* nombreEquipoActualPtr = actual->nombre.data();
             //Comparando los valores de nombre, si es cero se cumple.
             if (strcmp(nombreEquipoPtr, nombreEquipoActualPtr) == 0) {
@@ -137,7 +257,7 @@ int Equipos::Retirar(std::string nombreEquipo) {
             }//para moverse al nodo siguiente
             actual=actual->siguiente;
 
-        }while(actual!=inicio);
+        }while(!recorridoCompleto && inicio != final);
         return 0;
     }}
 
@@ -156,7 +276,13 @@ Equipo Equipos::Consultar(string nombreEquipo) {
         string nombreABuscarStr = nombreEquipo;
         transform(nombreABuscarStr.begin(), nombreABuscarStr.end(), nombreABuscarStr.begin(), ::tolower);
         char *nombreABuscar = nombreABuscarStr.data();
+        bool recorridoCompleto = false;
+
         do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
             string nombreActualStr = actual->nombre;
             transform(nombreActualStr.begin(), nombreActualStr.end(), nombreActualStr.begin(), ::tolower);
             char *nombreActual = nombreActualStr.data();
@@ -171,6 +297,8 @@ Equipo Equipos::Consultar(string nombreEquipo) {
                 equipo.minPh = actual->minPh;
                 equipo.estado = actual->estado;
                 equipo.cantSolicitudes = actual->cantSolicitudes;
+                equipo.anterior = actual->anterior;
+                equipo.siguiente = actual->siguiente;
                 return equipo;
             } else {
                 if (actual->siguiente == inicio) {
@@ -178,7 +306,7 @@ Equipo Equipos::Consultar(string nombreEquipo) {
                 }
                 actual = actual->siguiente;
             }
-        } while (actual != inicio);
+        } while (!recorridoCompleto && inicio != final);
         return equipo;
     }
 }
@@ -195,7 +323,13 @@ int Equipos::Modificar(string nombre, int annio, string descripcion, string cate
         string nombreNuevoStr = nombre;
         transform(nombreNuevoStr.begin(), nombreNuevoStr.end(), nombreNuevoStr.begin(), ::tolower);
         char *nombreNuevo = nombreNuevoStr.data();
+        bool recorridoCompleto = false;
+
         do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
             string nombreActualStr = actual->nombre;
             transform(nombreActualStr.begin(), nombreActualStr.end(), nombreActualStr.begin(), ::tolower);
             char *nombreActual = nombreActualStr.data();
@@ -216,7 +350,7 @@ int Equipos::Modificar(string nombre, int annio, string descripcion, string cate
                 }
                 actual = actual->siguiente;
             }
-        } while (actual != inicio);
+        } while (!recorridoCompleto && inicio != final);
         return 0;
     }
 }
@@ -236,19 +370,34 @@ int Equipos::Cantidad()
 {
     int cantidad = 0;
     Equipo* actual = inicio;
-    while (actual != nullptr)
+    bool recorridoCompleto = false;
+    do
     {
+        if (actual == final)
+        {
+            recorridoCompleto = true;
+        }
+
         cantidad++;
         actual = actual->siguiente;
-    }
+    } while (!recorridoCompleto && inicio != final);
     return cantidad;
 }
 
 void Equipos::Imprimir()
 {
     Equipo* actual = inicio;
+    Equipo* inicio = this->inicio;
+    Equipo* final = this->final;
+
+    bool recorridoCompleto = false;
     do
     {
+        if (actual == final)
+        {
+            recorridoCompleto = true;
+        }
+
         cout << "Nombre: " << actual->nombre << "\n";
         cout << "Annio: " << actual->annio << "\n";
         cout << "Descripcion: " << actual->descripcion << "\n";
@@ -259,28 +408,195 @@ void Equipos::Imprimir()
         cout << "Cantidad de solicitudes: " << actual->cantSolicitudes << "\n";
         cout << "\n";
         actual = actual->siguiente;
-    } while (actual != inicio);
+    } while (!recorridoCompleto && inicio != final);
+}
+
+Equipos Equipos::CopiarLista() {
+    Equipos equiposCopia; //Lista auxiliar
+    Equipo *actual = inicio; //nodo actual de lista original
+    bool recorridoCompleto = false;
+    //Para hacer una copia de la lista
+    do {
+        if (actual == final) {
+            recorridoCompleto = true;
+        }
+
+        //Lista vacia
+        if(inicio == nullptr){
+            //no se hace nada
+        }
+        else//Lista con nodos
+        {
+            Equipo* nuevo = new Equipo();
+            nuevo->nombre = actual->nombre;
+            nuevo->annio = actual->annio;
+            nuevo->descripcion = actual->descripcion;
+            nuevo->categoria = actual->categoria;
+            nuevo->maxPh = actual->maxPh;
+            nuevo->minPh = actual->minPh;
+            nuevo->estado = actual->estado;
+            nuevo->cantSolicitudes = actual->cantSolicitudes;
+            nuevo->anterior = nullptr;
+            nuevo->siguiente = nullptr;
+
+            //Si la lista está vacía
+            if(equiposCopia.inicio== nullptr){
+                equiposCopia.inicio = nuevo;
+                equiposCopia.final = nuevo;
+            }
+            else //Si ya tiene algún nodo
+            {
+                nuevo->anterior = equiposCopia.final;
+                nuevo->siguiente = equiposCopia.inicio;
+                equiposCopia.final->siguiente = nuevo;
+                equiposCopia.final = nuevo;
+            }
+        }
+        actual = actual->siguiente;
+    } while (!recorridoCompleto && inicio != final);
+    return equiposCopia;
 }
 
 Equipos Equipos::ListarEquipos(int param, int orden) {
-    //Param = 0 ordenar por nombre
-    //Param = 1 ordenar por annio
-    //Orden = 0 ordenar ascendentemente
-    //Orden = 1 ordenar descendentemente
+    //Param = 1 ordenar por nombre
+    //Param = 2 ordenar por annio
+    //Orden = 1 ordenar ascendentemente
+    //Orden = -1 ordenar descendentemente
 
     Equipos equiposOrdenados; //Lista auxiliar
+    bool recorridoCompleto = false;
 
-    if(param==0 && orden ==0){ //Ordenar por nombre ascendentemente
-        Equipo *actual = inicio; //nodo actual de lista original
-        //Para hacer una copia de la lista
-        do {
-            //Lista vacia
-            if(inicio == nullptr){
-                //no se hace nada
+    if(param==1 && orden ==1){ //Ordenar por nombre ascendentemente
+        equiposOrdenados = CopiarLista();
+    }
+    else if(param==1 && orden ==-1) //Ordenar por nombre descendentemente
+    {
+        Equipo *actual = final;
+        do
+        {
+            if (actual == inicio) {
+                recorridoCompleto = true;
             }
-            else//Lista con nodos
+
+            Equipo* nuevo = new Equipo();
+            nuevo->nombre = actual->nombre;
+            nuevo->annio = actual->annio;
+            nuevo->descripcion = actual->descripcion;
+            nuevo->categoria = actual->categoria;
+            nuevo->maxPh = actual->maxPh;
+            nuevo->minPh = actual->minPh;
+            nuevo->estado = actual->estado;
+            nuevo->cantSolicitudes = actual->cantSolicitudes;
+            nuevo->anterior = nullptr;
+            nuevo->siguiente = nullptr;
+
+            //Si la lista está vacía
+            if(equiposOrdenados.inicio== nullptr){
+                equiposOrdenados.inicio = nuevo;
+                equiposOrdenados.final = nuevo;
+            }
+            else //Si ya tiene algún nodo
             {
-                Equipo* nuevo = new Equipo();
+                nuevo->anterior = equiposOrdenados.final;
+                nuevo->siguiente = equiposOrdenados.inicio;
+                equiposOrdenados.final->siguiente = nuevo;
+                equiposOrdenados.final = nuevo;
+            }
+
+            actual = actual->anterior;
+        } while (!recorridoCompleto && inicio != final);
+    } else if(param==2 && orden ==1) //Ordenar por annio ascendentemente
+    {
+        Equipo *actual = inicio;
+        do
+        {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+            equiposOrdenados.AgregarAnnio(actual->nombre,actual->annio,actual->descripcion,actual->categoria,actual->maxPh,actual->minPh, actual->estado, actual->cantSolicitudes);
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+    } else if(param==2 && orden ==-1) //Ordenar por annio descendentemente
+    {
+        Equipos equiposAux;
+        Equipo *actual = inicio;
+        do
+        {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+            equiposAux.AgregarAnnio(actual->nombre,actual->annio,actual->descripcion,actual->categoria,actual->maxPh,actual->minPh, actual->estado, actual->cantSolicitudes);
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+
+        recorridoCompleto = false;
+        actual = equiposAux.final;
+
+        //Agrego los equipos en la lista de equipos ordenados
+        do
+        {
+            if (actual == equiposAux.inicio) {
+                recorridoCompleto = true;
+            }
+
+            Equipo* nuevo = new Equipo();
+            nuevo->nombre = actual->nombre;
+            nuevo->annio = actual->annio;
+            nuevo->descripcion = actual->descripcion;
+            nuevo->categoria = actual->categoria;
+            nuevo->maxPh = actual->maxPh;
+            nuevo->minPh = actual->minPh;
+            nuevo->estado = actual->estado;
+            nuevo->cantSolicitudes = actual->cantSolicitudes;
+            nuevo->anterior = nullptr;
+            nuevo->siguiente = nullptr;
+
+            //Si la lista está vacía
+            if(equiposOrdenados.inicio== nullptr){
+                equiposOrdenados.inicio = nuevo;
+                equiposOrdenados.final = nuevo;
+            }
+            else //Si ya tiene algún nodo
+            {
+                nuevo->anterior = equiposOrdenados.final;
+                nuevo->siguiente = equiposOrdenados.inicio;
+                equiposOrdenados.final->siguiente = nuevo;
+                equiposOrdenados.final = nuevo;
+            }
+
+            actual = actual->anterior;
+        } while (!recorridoCompleto && inicio != final);
+    }
+    return equiposOrdenados;
+}
+
+Equipos Equipos::ListarEquiposBuscarNombre(std::string hilera) {
+    Equipos equiposBuscados; //Lista auxiliar
+    string hileraLC = hilera;
+    transform(hileraLC.begin(), hileraLC.end(), hileraLC.begin(), ::tolower);
+    regex regEx(hileraLC);
+
+    //Lista vacia
+    if (inicio == nullptr) {
+        return equiposBuscados;
+    }
+        //Lista con nodos
+    else {
+        //Recorro la lista para ver si existe el equipo
+        Equipo *actual = inicio;
+        bool recorridoCompleto = false;
+
+        do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            string nombreActualLC = actual->nombre;
+            transform(nombreActualLC.begin(), nombreActualLC.end(), nombreActualLC.begin(), ::tolower);
+
+            //Si el nombre del equipo nuevo es igual al nombre del equipo actual
+            if (regex_search(nombreActualLC, regEx)) {
+                Equipo *nuevo = new Equipo();
                 nuevo->nombre = actual->nombre;
                 nuevo->annio = actual->annio;
                 nuevo->descripcion = actual->descripcion;
@@ -292,29 +608,45 @@ Equipos Equipos::ListarEquipos(int param, int orden) {
                 nuevo->anterior = nullptr;
                 nuevo->siguiente = nullptr;
 
-                // equiposOrdenados.Agregar(actual->nombre,actual->annio,actual->descripcion,actual->categoria,actual->maxPh,actual->minPh);
                 //Si la lista está vacía
-                if(equiposOrdenados.inicio== nullptr){
-                    equiposOrdenados.inicio = nuevo;
-                    equiposOrdenados.final = nuevo;
-                }
-                else //Si ya tiene algún nodo
+                if (equiposBuscados.inicio == nullptr) {
+                    equiposBuscados.inicio = nuevo;
+                    equiposBuscados.final = nuevo;
+                } else //Si ya tiene algún nodo
                 {
-                    nuevo->anterior = equiposOrdenados.final;
-                    nuevo->siguiente = equiposOrdenados.inicio;
-                    equiposOrdenados.final->siguiente = nuevo;
-                    equiposOrdenados.final = nuevo;
+                    nuevo->anterior = equiposBuscados.final;
+                    nuevo->siguiente = equiposBuscados.inicio;
+                    equiposBuscados.final->siguiente = nuevo;
+                    equiposBuscados.final = nuevo;
+                    equiposBuscados.inicio->anterior = equiposBuscados.final;
                 }
             }
             actual = actual->siguiente;
-        } while (actual != inicio);
+        } while (!recorridoCompleto && inicio != final);
+        return equiposBuscados;
     }
-    else if(param==0 && orden ==1) //Ordenar por nombre descendentemente
-    {
-        Equipo *actual = final;
+}
+
+Equipos Equipos::ListarEquiposRangoAnnios(int annioInicial, int annioFinal) {
+    Equipos equiposBuscados; //Lista auxiliar
+
+    //Lista vacia
+    if (inicio == nullptr) {
+        return equiposBuscados;
+    }
+        //Lista con nodos
+    else {
+        //Recorro la lista para ver si existe el equipo
+        Equipo *actual = inicio;
+        bool recorridoCompleto = false;
+
         do {
-            //Lista vacia
-                Equipo* nuevo = new Equipo();
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            if (actual->annio >= annioInicial && actual->annio <= annioFinal) {
+                Equipo *nuevo = new Equipo();
                 nuevo->nombre = actual->nombre;
                 nuevo->annio = actual->annio;
                 nuevo->descripcion = actual->descripcion;
@@ -327,22 +659,144 @@ Equipos Equipos::ListarEquipos(int param, int orden) {
                 nuevo->siguiente = nullptr;
 
                 //Si la lista está vacía
-                if(equiposOrdenados.inicio== nullptr){
-                    equiposOrdenados.inicio = nuevo;
-                    equiposOrdenados.final = nuevo;
-                }
-                else //Si ya tiene algún nodo
+                if (equiposBuscados.inicio == nullptr) {
+                    equiposBuscados.inicio = nuevo;
+                    equiposBuscados.final = nuevo;
+                } else //Si ya tiene algún nodo
                 {
-                    nuevo->anterior = equiposOrdenados.final;
-                    nuevo->siguiente = equiposOrdenados.inicio;
-                    equiposOrdenados.final->siguiente = nuevo;
-                    equiposOrdenados.final = nuevo;
+                    nuevo->anterior = equiposBuscados.final;
+                    nuevo->siguiente = equiposBuscados.inicio;
+                    equiposBuscados.final->siguiente = nuevo;
+                    equiposBuscados.final = nuevo;
+                    equiposBuscados.inicio->anterior = equiposBuscados.final;
+                }
+            }
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+        return equiposBuscados;
+    }
+}
+
+Equipos Equipos::ListarEquiposCantSolicitudes(int cantSolicitudes) {
+    Equipos equiposBuscados; //Lista auxiliar
+
+    //Lista vacia
+    if (inicio == nullptr) {
+        return equiposBuscados;
+    }
+        //Lista con nodos
+    else {
+        //Recorro la lista para ver si existe el equipo
+        Equipo *actual = inicio;
+        bool recorridoCompleto = false;
+
+        do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            if (actual->cantSolicitudes < cantSolicitudes ) {
+                Equipo *nuevo = new Equipo();
+                nuevo->nombre = actual->nombre;
+                nuevo->annio = actual->annio;
+                nuevo->descripcion = actual->descripcion;
+                nuevo->categoria = actual->categoria;
+                nuevo->maxPh = actual->maxPh;
+                nuevo->minPh = actual->minPh;
+                nuevo->estado = actual->estado;
+                nuevo->cantSolicitudes = actual->cantSolicitudes;
+                nuevo->anterior = nullptr;
+                nuevo->siguiente = nullptr;
+
+                //Si la lista está vacía
+                if (equiposBuscados.inicio == nullptr) {
+                    equiposBuscados.inicio = nuevo;
+                    equiposBuscados.final = nuevo;
+                } else //Si ya tiene algún nodo
+                {
+                    nuevo->anterior = equiposBuscados.final;
+                    nuevo->siguiente = equiposBuscados.inicio;
+                    equiposBuscados.final->siguiente = nuevo;
+                    equiposBuscados.final = nuevo;
+                    equiposBuscados.inicio->anterior = equiposBuscados.final;
+                }
+            }
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+        return equiposBuscados;
+    }
+}
+
+Equipos Equipos::EliminarEquiposCantSolicitudes(int cantSolicitudes) {
+    Equipos equiposEliminados; //Lista auxiliar
+
+    //Lista vacia
+    if (inicio == nullptr) {
+        return equiposEliminados;
+    }
+        //Lista con nodos
+    else {
+        //Recorro la lista para ver si existe el equipo
+        Equipo *actual = inicio;
+        bool recorridoCompleto = false;
+
+        do {
+            Equipo *borrar = actual;
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            if (actual->cantSolicitudes < cantSolicitudes ) {
+                Equipo *nuevo = new Equipo();
+                nuevo->nombre = actual->nombre;
+                nuevo->annio = actual->annio;
+                nuevo->descripcion = actual->descripcion;
+                nuevo->categoria = actual->categoria;
+                nuevo->maxPh = actual->maxPh;
+                nuevo->minPh = actual->minPh;
+                nuevo->estado = actual->estado;
+                nuevo->cantSolicitudes = actual->cantSolicitudes;
+                nuevo->anterior = nullptr;
+                nuevo->siguiente = nullptr;
+
+                //Si la lista está vacía
+                if (equiposEliminados.inicio == nullptr) {
+                    equiposEliminados.inicio = nuevo;
+                    equiposEliminados.final = nuevo;
+                } else //Si ya tiene algún nodo
+                {
+                    nuevo->anterior = equiposEliminados.final;
+                    nuevo->siguiente = equiposEliminados.inicio;
+                    equiposEliminados.final->siguiente = nuevo;
+                    equiposEliminados.final = nuevo;
+                    equiposEliminados.inicio->anterior = equiposEliminados.final;
                 }
 
-            actual = actual->anterior;
-        } while (actual != final);
+                //Eliminando el equipo de la lista original
+                //Si es el nodo inicial
+                if (actual == inicio)
+                {
+                    final->siguiente = actual->siguiente;
+                    inicio = actual->siguiente;
+                    inicio->anterior = final;
+                }//si es el nodo final
+                else if (actual == final)
+                {
+                    inicio->anterior = actual->anterior;
+                    actual->anterior->siguiente = inicio;
+                    final=actual->anterior;
+                }
+                else //si es cualquier otro nodo
+                {
+                    actual->anterior->siguiente=actual->siguiente;
+                    actual->siguiente->anterior=actual->anterior;
+                }
+                delete borrar;
+            }
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
     }
-    return equiposOrdenados;
+    return equiposEliminados;
 }
 
 
