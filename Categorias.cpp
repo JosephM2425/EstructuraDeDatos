@@ -1,4 +1,7 @@
 #include "Categorias.h"
+#include <iostream>
+using namespace std;
+
 
 Categorias::Categorias() {}
 
@@ -53,10 +56,10 @@ void Categorias::Retirar(string nombre)
 	 	
 }
 
-void Categorias::Modificar(Categorias& lista, string categoria, string categoriaNueva)
+void Categorias::Modificar(string categoria, string categoriaNueva)
 {
 	
-	Categoria* actual = list.inicio;
+	Categoria* actual = inicio;
 	
 	while(actual != nullptr) 
 	{
@@ -68,9 +71,9 @@ void Categorias::Modificar(Categorias& lista, string categoria, string categoria
 	}
 }
 
-void Categorias::listarCategoriaAsc(Categorias& lista)
+Categorias Categorias::listarCategoriaAsc()
 {
-	Categoria* actual = lista.inicio;
+	Categoria* actual = inicio;
 	while (actual != nullptr)
     {
         cout << actual->nombre << endl;
@@ -78,9 +81,9 @@ void Categorias::listarCategoriaAsc(Categorias& lista)
     }
 }
 
-void Categorias::listarCategoriaDesc(Categorias& lista)
+Categorias Categorias::listarCategoriaDesc()
 {
-	Categoria* actual = lista.final;
+	Categoria* actual = final;
 	while (actual != nullptr)
     {
         cout << actual->nombre << endl;

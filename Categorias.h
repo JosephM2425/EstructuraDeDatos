@@ -21,7 +21,7 @@ public:
 
     void Agregar(string nombre);
     void Retirar(string nombreCategoria);
-    void Modificar(string nombreCategoria);
+    void Modificar(string categoria, string nombreCategoria);
     Categoria Consultar(string nombreCategoria);
     Categoria Inicio();
     Categoria Final();
