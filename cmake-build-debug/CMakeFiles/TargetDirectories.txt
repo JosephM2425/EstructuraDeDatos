@@ -1,3 +1,3 @@
-C:/Users/chavesarayas/OneDrive - Microsoft/Documents/Steven/Cenfotec/Estructuras de datos/Proyecto/Codigo/EstructuraDeDatos/cmake-build-debug/CMakeFiles/EstructuraDeDatos.dir
-C:/Users/chavesarayas/OneDrive - Microsoft/Documents/Steven/Cenfotec/Estructuras de datos/Proyecto/Codigo/EstructuraDeDatos/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/chavesarayas/OneDrive - Microsoft/Documents/Steven/Cenfotec/Estructuras de datos/Proyecto/Codigo/EstructuraDeDatos/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Código/EstructuraDeDatos/cmake-build-debug/CMakeFiles/EstructuraDeDatos.dir
+C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Código/EstructuraDeDatos/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Código/EstructuraDeDatos/cmake-build-debug/CMakeFiles/rebuild_cache.dir

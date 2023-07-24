@@ -59,10 +59,10 @@ int main() {
     Equipos equiposCopia =  equipos.ListarEquipos(0,0); //por nombre a como estan
     cout << "-----------------------Orden ascendente por nombre ------------------------" << endl;
     equiposCopia.Imprimir();
-//    //por nombre desc
-//    Equipos equiposCopiaDesc =  equipos.ListarEquipos(0,1);
-//    cout << "-----------------------Orden descendente por nombre ------------------------" << endl;
-//    equiposCopiaDesc.Imprimir();
+    //por nombre desc
+    Equipos equiposCopiaDesc =  equipos.ListarEquipos(0,1);
+    cout << "-----------------------Orden descendente por nombre ------------------------" << endl;
+    equiposCopiaDesc.Imprimir();
 
     return 0;
 }

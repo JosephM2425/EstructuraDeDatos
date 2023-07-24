@@ -34,7 +34,7 @@ int Equipos::Agregar(string nombre, int annio, string descripcion, string catego
     {
         inicio = nuevo;
         inicio->siguiente = inicio;
-        inicio->anterior = inicio;
+        inicio->anterior = final;
         final = inicio;
         return 1;
     }
@@ -61,6 +61,7 @@ int Equipos::Agregar(string nombre, int annio, string descripcion, string catego
                         nuevo->siguiente = actual;
                         actual->anterior = nuevo;
                         inicio = nuevo;
+                        inicio->anterior = final;
                         final->siguiente = inicio;
                     } else
                     {
@@ -81,6 +82,7 @@ int Equipos::Agregar(string nombre, int annio, string descripcion, string catego
                         actual->siguiente = nuevo;
                         nuevo->siguiente = inicio;
                         final = nuevo;
+                        inicio->anterior = final;
                         return 1;
                     }
                     actual = actual->siguiente;
@@ -260,96 +262,89 @@ void Equipos::Imprimir()
     } while (actual != inicio);
 }
 
-Equipos Equipos::ListarEquipos(int param, int orden){
-
+Equipos Equipos::ListarEquipos(int param, int orden) {
     //Param = 0 ordenar por nombre
     //Param = 1 ordenar por annio
     //Orden = 0 ordenar ascendentemente
     //Orden = 1 ordenar descendentemente
-   // Equipos equipos;
-
 
     Equipos equiposOrdenados; //Lista auxiliar
-    Equipo *actual = inicio; //nodo actual de lista original
-    //Para hacer una copia de la lista
-    do {
-        //Lista vacia
-        if(inicio == nullptr){
-            //no se hace nada
-        }
-        else//Lista con nodos
-        {
-            Equipo* nuevo = new Equipo();
-            nuevo->nombre = actual->nombre;
-            nuevo->annio = actual->annio;
-            nuevo->descripcion = actual->descripcion;
-            nuevo->categoria = actual->categoria;
-            nuevo->maxPh = actual->maxPh;
-            nuevo->minPh = actual->minPh;
-            nuevo->estado = actual->estado;
-            nuevo->cantSolicitudes = actual->cantSolicitudes;
-            nuevo->anterior = nullptr;
-            nuevo->siguiente = nullptr;
 
-            // equiposOrdenados.Agregar(actual->nombre,actual->annio,actual->descripcion,actual->categoria,actual->maxPh,actual->minPh);
-            //Si la lista está vacía
-            if(equiposOrdenados.inicio== nullptr){
-                equiposOrdenados.inicio = nuevo;
-                equiposOrdenados.final = nuevo;
+    if(param==0 && orden ==0){ //Ordenar por nombre ascendentemente
+        Equipo *actual = inicio; //nodo actual de lista original
+        //Para hacer una copia de la lista
+        do {
+            //Lista vacia
+            if(inicio == nullptr){
+                //no se hace nada
             }
-            else //Si ya tiene algún nodo
+            else//Lista con nodos
             {
-                nuevo->anterior = equiposOrdenados.final;
-                nuevo->siguiente = equiposOrdenados.inicio;
-                equiposOrdenados.final->siguiente = nuevo;
-                equiposOrdenados.final = nuevo;
+                Equipo* nuevo = new Equipo();
+                nuevo->nombre = actual->nombre;
+                nuevo->annio = actual->annio;
+                nuevo->descripcion = actual->descripcion;
+                nuevo->categoria = actual->categoria;
+                nuevo->maxPh = actual->maxPh;
+                nuevo->minPh = actual->minPh;
+                nuevo->estado = actual->estado;
+                nuevo->cantSolicitudes = actual->cantSolicitudes;
+                nuevo->anterior = nullptr;
+                nuevo->siguiente = nullptr;
+
+                // equiposOrdenados.Agregar(actual->nombre,actual->annio,actual->descripcion,actual->categoria,actual->maxPh,actual->minPh);
+                //Si la lista está vacía
+                if(equiposOrdenados.inicio== nullptr){
+                    equiposOrdenados.inicio = nuevo;
+                    equiposOrdenados.final = nuevo;
+                }
+                else //Si ya tiene algún nodo
+                {
+                    nuevo->anterior = equiposOrdenados.final;
+                    nuevo->siguiente = equiposOrdenados.inicio;
+                    equiposOrdenados.final->siguiente = nuevo;
+                    equiposOrdenados.final = nuevo;
+                }
             }
-        }
-        actual = actual->siguiente;
-    } while (actual != inicio);
+            actual = actual->siguiente;
+        } while (actual != inicio);
+    }
+    else if(param==0 && orden ==1) //Ordenar por nombre descendentemente
+    {
+        Equipo *actual = final;
+        do {
+            //Lista vacia
+                Equipo* nuevo = new Equipo();
+                nuevo->nombre = actual->nombre;
+                nuevo->annio = actual->annio;
+                nuevo->descripcion = actual->descripcion;
+                nuevo->categoria = actual->categoria;
+                nuevo->maxPh = actual->maxPh;
+                nuevo->minPh = actual->minPh;
+                nuevo->estado = actual->estado;
+                nuevo->cantSolicitudes = actual->cantSolicitudes;
+                nuevo->anterior = nullptr;
+                nuevo->siguiente = nullptr;
+
+                //Si la lista está vacía
+                if(equiposOrdenados.inicio== nullptr){
+                    equiposOrdenados.inicio = nuevo;
+                    equiposOrdenados.final = nuevo;
+                }
+                else //Si ya tiene algún nodo
+                {
+                    nuevo->anterior = equiposOrdenados.final;
+                    nuevo->siguiente = equiposOrdenados.inicio;
+                    equiposOrdenados.final->siguiente = nuevo;
+                    equiposOrdenados.final = nuevo;
+                }
+
+            actual = actual->anterior;
+        } while (actual != final);
+    }
     return equiposOrdenados;
-
-
-//    if(param==0 && orden ==0){ //Ordenar por nombre ascendentemente
-//
-//    }
-//    else if(param==0 && orden ==1) //Ordenar por nombre descendentemente
-//    {
-//        Equipos equiposOrdeXNombreDesc; //Lista auxiliar
-//        Equipo *actual = final;
-//        do {
-//            //Lista vacia
-//                Equipo* nuevo = new Equipo();
-//                nuevo->nombre = actual->nombre;
-//                nuevo->annio = actual->annio;
-//                nuevo->descripcion = actual->descripcion;
-//                nuevo->categoria = actual->categoria;
-//                nuevo->maxPh = actual->maxPh;
-//                nuevo->minPh = actual->minPh;
-//                nuevo->estado = actual->estado;
-//                nuevo->cantSolicitudes = actual->cantSolicitudes;
-//                nuevo->anterior = nullptr;
-//                nuevo->siguiente = nullptr;
-//
-//                //Si la lista está vacía
-//                if(equiposOrdeXNombreDesc.inicio== nullptr){
-//                    equiposOrdeXNombreDesc.inicio = nuevo;
-//                    equiposOrdeXNombreDesc.final = nuevo;
-//                }
-//                else //Si ya tiene algún nodo
-//                {
-//                    nuevo->anterior = equiposOrdeXNombreDesc.final;
-//                    nuevo->siguiente = equiposOrdeXNombreDesc.inicio;
-//                    equiposOrdeXNombreDesc.final->siguiente = nuevo;
-//                    equiposOrdeXNombreDesc.final = nuevo;
-//                }
-//
-//            actual = actual->anterior;
-//        } while (actual != final);
-//        return equiposOrdeXNombreDesc;
-//    }
-//    return equipos;
 }
+
 
 
 
