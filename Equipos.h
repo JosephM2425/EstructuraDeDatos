@@ -3,6 +3,8 @@
 
 #include <string>
 #include "Equipo.h"
+#include "Categoria.h"
+
 
 using namespace std;
 
@@ -14,12 +16,14 @@ private:
 
 public:
     Equipos();
-    int Agregar(string nombre, int annio, string descripcion, Categoria categoria, int maxPh, int minPh);
+    int Agregar(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh);
     int Retirar(string nombreEquipo);
-    int Modificar(string nombreEquipo);
+    int Modificar(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh, bool estado, int cantSolicitudes);
     Equipo Consultar(string nombreEquipo);
     Equipo Inicio();
     Equipo Final();
+    int Cantidad();
+    void Imprimir();
     Equipos ListarEquipos(int param, int orden);
     Equipos ListarEquiposBuscarNombre(string hilera);
     Equipos ListarEquiposRangoAnnios(int annioInicial, int annioFinal);
