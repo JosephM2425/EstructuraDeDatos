@@ -24,6 +24,7 @@ public:
     void insertarEquipo(Equipo equipo);
     void actualizarEquipo(Equipo equipo, int idEquipo);
     void eliminarEquipo(int idEquipo);
+    void listarEquipos();
 
 };
 

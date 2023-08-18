@@ -10,7 +10,7 @@
 #include <cppconn/statement.h>
 #include "EquipoDAO.h"
 
-int main() {
+int main() {git
     EquipoDAO equipoDao("tcp://cenph0.mysql.database.azure.com:3306", "francisco", "stevenChaves123.", "equiposdb");
 
     // Call methods
@@ -40,7 +40,8 @@ int main() {
     //para borrar un equipo
     //equipoDao.eliminarEquipo();
 
-
+    //para generar lista ordenada alfabeticamente con los equipos en la base de datos
+    equipoDao.listarEquipos();
     return 0;
 }
 

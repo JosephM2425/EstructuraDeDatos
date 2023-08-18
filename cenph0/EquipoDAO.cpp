@@ -7,6 +7,7 @@
 #include <cppconn/driver.h>
 #include "Equipo.h"
 #include "EquipoDAO.h"
+#include "Equipos.h"
 
 
 EquipoDAO::EquipoDAO(const std::string& host, const std::string& user, const std::string& password, const std::string& schema) {
@@ -120,7 +121,44 @@ void EquipoDAO::eliminarEquipo(int idEquipo) {
     }
 
 
+void EquipoDAO::listarEquipos() {
+    try {
+        std::string queryEquipo = "SELECT nombreEquipo, annio, descripcion, minPh, maxPh, estado, cantSolicitudes,nombreCategoria FROM equipo INNER JOIN categoria ON equipo.idCategoria = categoria.idCategoria; ";
+        sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
 
+        sql::ResultSet* res = stmtEquipo->executeQuery();
+
+        //Instanciando la lista donde se guardarán los equipos de la base de datos
+        Equipos listaEquipos;
+
+        while (res->next()) {
+
+            //Instanciando un equipo para asignarle los valores de las columnas
+            Equipo nuevo;
+            nuevo.nombre = res->getString("nombreEquipo");
+            nuevo.annio = res->getInt("annio");
+            nuevo.descripcion = res->getString("descripcion");
+            nuevo.minPh = res->getInt("minPh");
+            nuevo.maxPh = res->getInt("maxPh");
+            nuevo.estado = res->getBoolean("estado");
+            nuevo.cantSolicitudes = res->getInt("cantSolicitudes");
+            nuevo.categoria = res->getInt("nombreCategoria");
+
+            //Agregando el nuevo equipo a la lista
+            listaEquipos.AgregarTemp(nuevo);
+        }
+        listaEquipos.Imprimir();
+        delete res;
+        delete stmtEquipo;
+        delete con;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+    }
+    catch (std::runtime_error& e) {
+        std::cerr << "Runtime Error: " << e.what() << std::endl;
+    }
+}
 
 
 
