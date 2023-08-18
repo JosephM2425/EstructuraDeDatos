@@ -17,7 +17,7 @@ private:
 public:
     Equipos();
     int AgregarTemp(Equipo equipo);
-    int Agregar(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh);
+    int Agregar(Equipo equipo);
     int Retirar(string nombreEquipo);
     int Modificar(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh, bool estado, int cantSolicitudes);
     Equipo Consultar(string nombreEquipo);

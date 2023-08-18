@@ -96,17 +96,17 @@ int Equipos::AgregarTemp(Equipo equipo)
 }
 
 
-int Equipos::Agregar(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh)
+int Equipos::Agregar(Equipo equipo)
 {
     Equipo* nuevo = new Equipo();
-    nuevo->nombre = nombre;
-    nuevo->annio = annio;
-    nuevo->descripcion = descripcion;
-    nuevo->categoria = categoria;
-    nuevo->maxPh = maxPh;
-    nuevo->minPh = minPh;
-    nuevo->estado = false;
-    nuevo->cantSolicitudes = 0;
+    nuevo->nombre = equipo.nombre;
+    nuevo->annio = equipo.annio;
+    nuevo->descripcion = equipo.descripcion;
+    nuevo->categoria = equipo.categoria;
+    nuevo->maxPh = equipo.maxPh;
+    nuevo->minPh = equipo.minPh;
+    nuevo->estado = equipo.estado;
+    nuevo->cantSolicitudes = equipo.cantSolicitudes;
     nuevo->anterior = nullptr;
     nuevo->siguiente = nullptr;
 
@@ -126,12 +126,12 @@ int Equipos::Agregar(string nombre, int annio, string descripcion, string catego
         Equipo* actual = inicio;
         string nombreNuevoStr = nuevo->nombre;
         transform(nombreNuevoStr.begin(), nombreNuevoStr.end(), nombreNuevoStr.begin(), ::tolower);
-        char* nombreNuevo = nombreNuevoStr.data();
+        const char* nombreNuevo = nombreNuevoStr.data();
         do
         {
             string nombreActualStr = actual->nombre;
             transform(nombreActualStr.begin(), nombreActualStr.end(), nombreActualStr.begin(), ::tolower);
-            char* nombreActual = nombreActualStr.data();
+            const char* nombreActual = nombreActualStr.data();
 
             //Si el nombre del equipo nuevo es menor al nombre del equipo actual
             if (strcmp(nombreNuevo, nombreActual) < 0)
@@ -181,7 +181,7 @@ int Equipos::Agregar(string nombre, int annio, string descripcion, string catego
 int Equipos::Retirar(std::string nombreEquipo) {
 
     //Almacendando el nombre del equipo como puntero y el uso de la función .data() para poder usarlo en la comparación
-    char* nombreEquipoPtr = nombreEquipo.data();
+    const char* nombreEquipoPtr = nombreEquipo.data();
 
     //Si la lista está vacía
     if (inicio == nullptr)
@@ -191,7 +191,7 @@ int Equipos::Retirar(std::string nombreEquipo) {
     else {
         Equipo* actual = inicio;
         do {
-            char* nombreEquipoActualPtr = actual->nombre.data();
+            const char* nombreEquipoActualPtr = actual->nombre.data();
             //Comparando los valores de nombre, si es cero se cumple.
             if (strcmp(nombreEquipoPtr, nombreEquipoActualPtr) == 0) {
                 //Si es el nodo inicial
@@ -239,11 +239,11 @@ Equipo Equipos::Consultar(string nombreEquipo) {
         Equipo* actual = inicio;
         string nombreABuscarStr = nombreEquipo;
         transform(nombreABuscarStr.begin(), nombreABuscarStr.end(), nombreABuscarStr.begin(), ::tolower);
-        char* nombreABuscar = nombreABuscarStr.data();
+        const char* nombreABuscar = nombreABuscarStr.data();
         do {
             string nombreActualStr = actual->nombre;
             transform(nombreActualStr.begin(), nombreActualStr.end(), nombreActualStr.begin(), ::tolower);
-            char* nombreActual = nombreActualStr.data();
+            const char* nombreActual = nombreActualStr.data();
 
             //Si el nombre del equipo nuevo es igual al nombre del equipo actual
             if (strcmp(nombreABuscar, nombreActual) == 0) {
@@ -279,11 +279,11 @@ int Equipos::Modificar(string nombre, int annio, string descripcion, string cate
         Equipo* actual = inicio;
         string nombreNuevoStr = nombre;
         transform(nombreNuevoStr.begin(), nombreNuevoStr.end(), nombreNuevoStr.begin(), ::tolower);
-        char* nombreNuevo = nombreNuevoStr.data();
+        const char* nombreNuevo = nombreNuevoStr.data();
         do {
             string nombreActualStr = actual->nombre;
             transform(nombreActualStr.begin(), nombreActualStr.end(), nombreActualStr.begin(), ::tolower);
-            char* nombreActual = nombreActualStr.data();
+            const char* nombreActual = nombreActualStr.data();
 
             //Si el nombre del equipo nuevo es igual al nombre del equipo actual
             if (strcmp(nombreNuevo, nombreActual) == 0) {
