@@ -8,34 +8,15 @@
 #include "Equipo.h"
 #include "EquipoDAO.h"
 #include "Equipos.h"
+#include "Conexion.h"
 
-
-EquipoDAO::EquipoDAO(const std::string& host, const std::string& user, const std::string& password, const std::string& schema) {
-
-    driver = sql::mysql::get_mysql_driver_instance();
-    con = driver->connect(host, user, password);
-    con->setSchema(schema);
-
-    if (con->isValid()) {
-        std::cout << "Connected to MySQL server!" << std::endl;
-    }
-    else {
-        std::cout << "Connection failed!" << std::endl;
-    }
-
+EquipoDAO::EquipoDAO() {
+    con = conexion.obtenerConexion();
 }
-
-EquipoDAO::~EquipoDAO() {
-    delete con;
-}
-
-
 
 void EquipoDAO::insertarEquipo(Equipo equipo) {
-
     try
     {
-
         std::string queryEquipo = "INSERT INTO equipo (nombreEquipo, annio,descripcion,minPh,maxPh,estado,cantSolicitudes,idCategoria) VALUES (?,?,?,?,?,?,?,?)";
 
         sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
@@ -52,7 +33,6 @@ void EquipoDAO::insertarEquipo(Equipo equipo) {
         std::cout << "se logró" << std::endl;
 
         delete stmtEquipo;
-
     }
     catch (sql::SQLException& e) {
         std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
@@ -63,28 +43,25 @@ void EquipoDAO::insertarEquipo(Equipo equipo) {
     }
 }
 
-void EquipoDAO::actualizarEquipo(Equipo equipo, int idEquipo) {
+void EquipoDAO::actualizarEquipo(Equipo equipo) {
     try
     {
-
-        std::string queryEquipo = "UPDATE equipo SET nombreEquipo=?, annio=?, descripcion=?, minPh=?, maxPh=?, estado=?, cantSolicitudes=?, idCategoria=? WHERE idEquipo=? ";
+        std::string queryEquipo = "UPDATE equipo SET annio=?, descripcion=?, minPh=?, maxPh=?, estado=?, cantSolicitudes=?, idCategoria=? WHERE nombreEquipo=? ";
 
         sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
 
-        stmtEquipo->setString(1, equipo.nombre);
-        stmtEquipo->setInt(2, equipo.annio);
-        stmtEquipo->setString(3, equipo.descripcion);
-        stmtEquipo->setInt(4, equipo.minPh);
-        stmtEquipo->setInt(5, equipo.maxPh);
-        stmtEquipo->setBoolean(6, equipo.estado);
-        stmtEquipo->setInt(7, equipo.cantSolicitudes);
-        stmtEquipo->setInt(8, stoi(equipo.categoria));
-        stmtEquipo->setInt(9, idEquipo);
+        
+        stmtEquipo->setInt(1, equipo.annio);
+        stmtEquipo->setString(2, equipo.descripcion);
+        stmtEquipo->setInt(3, equipo.minPh);
+        stmtEquipo->setInt(4, equipo.maxPh);
+        stmtEquipo->setBoolean(5, equipo.estado);
+        stmtEquipo->setInt(6, equipo.cantSolicitudes);
+        stmtEquipo->setInt(7, stoi(equipo.categoria));
+        stmtEquipo->setString(8, equipo.nombre);
         stmtEquipo->execute();
-        std::cout << "se logró" << std::endl;
 
         delete stmtEquipo;
-
     }
     catch (sql::SQLException& e) {
         std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
@@ -95,20 +72,17 @@ void EquipoDAO::actualizarEquipo(Equipo equipo, int idEquipo) {
     }
 }
 
-void EquipoDAO::eliminarEquipo(int idEquipo) {
+void EquipoDAO::eliminarEquipo(std::string nombreEquipo) {
     try
     {
-
-        std::string queryEquipo = "DELETE FROM equipo WHERE idEquipo=? ";
+        std::string queryEquipo = "DELETE FROM equipo WHERE nombreEquipo=? ";
 
         sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
 
-        stmtEquipo->setInt(1, idEquipo);
+        stmtEquipo->setString(1, nombreEquipo);
         stmtEquipo->execute();
-        std::cout << "se logró" << std::endl;
 
         delete stmtEquipo;
-
     }
     catch (sql::SQLException& e) {
         std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
@@ -117,12 +91,12 @@ void EquipoDAO::eliminarEquipo(int idEquipo) {
         std::cerr << "Runtime Error: " << e.what() << std::endl;
 
     }
-       
-    }
+}
 
 
-void EquipoDAO::listarEquipos() {
+Equipos EquipoDAO::listarEquipos() {
     try {
+
         std::string queryEquipo = "SELECT nombreEquipo, annio, descripcion, minPh, maxPh, estado, cantSolicitudes,nombreCategoria FROM equipo INNER JOIN categoria ON equipo.idCategoria = categoria.idCategoria; ";
         sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
 
@@ -142,15 +116,46 @@ void EquipoDAO::listarEquipos() {
             nuevo.maxPh = res->getInt("maxPh");
             nuevo.estado = res->getBoolean("estado");
             nuevo.cantSolicitudes = res->getInt("cantSolicitudes");
-            nuevo.categoria = res->getInt("nombreCategoria");
+            nuevo.categoria = res->getString("nombreCategoria");
 
             //Agregando el nuevo equipo a la lista
-            listaEquipos.AgregarTemp(nuevo);
+            listaEquipos.Agregar(nuevo);
         }
-        listaEquipos.Imprimir();
         delete res;
         delete stmtEquipo;
-        delete con;
+        
+        return listaEquipos;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+    }
+    catch (std::runtime_error& e) {
+        std::cerr << "Runtime Error: " << e.what() << std::endl;
+    }
+}
+
+bool EquipoDAO::existeEquipo(std::string nombre) {
+    try {
+        bool existeEquipo = false;
+        std::string nombreBD;
+
+        std::string queryEquipo = "SELECT nombreEquipo FROM equipo WHERE nombreEquipo = ?;";
+        sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);       
+        stmtEquipo->setString(1, nombre);
+        sql::ResultSet* res = stmtEquipo->executeQuery();
+
+        while (res->next()) {
+            nombreBD = res->getString("nombreEquipo");
+        }
+
+        delete res;
+        delete stmtEquipo;
+        
+        if (nombreBD.size() > 0) {
+            existeEquipo = true;
+        }
+
+        return existeEquipo;
     }
     catch (sql::SQLException& e) {
         std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;

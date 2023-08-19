@@ -11,21 +11,20 @@
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
 #include "Equipo.h"
+#include "Equipos.h"
+#include "Conexion.h"
 
 class EquipoDAO {
 private:
-    sql::mysql::MySQL_Driver* driver;
+    Conexion conexion;
     sql::Connection* con;
-
 public:
-    EquipoDAO(const std::string& host, const std::string& user, const std::string& password, const std::string& schema);
-    ~EquipoDAO();
-
+    EquipoDAO();
     void insertarEquipo(Equipo equipo);
-    void actualizarEquipo(Equipo equipo, int idEquipo);
-    void eliminarEquipo(int idEquipo);
-    void listarEquipos();
-
+    void actualizarEquipo(Equipo equipo);
+    void eliminarEquipo(std::string nombreEquipo);
+    Equipos listarEquipos();
+    bool existeEquipo(std::string nombre);
 };
 
 #endif

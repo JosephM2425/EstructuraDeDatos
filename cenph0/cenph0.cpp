@@ -8,10 +8,10 @@
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
-#include "EquipoDAO.h"
+#include "GestorEquipos.h"
 
-int main() {git
-    EquipoDAO equipoDao("tcp://cenph0.mysql.database.azure.com:3306", "francisco", "stevenChaves123.", "equiposdb");
+int main() {
+    GestorEquipos gestorEquipos;
 
     // Call methods
     Equipo equipoPrueba;
@@ -22,26 +22,33 @@ int main() {git
     equipoPrueba.maxPh = 7;
     equipoPrueba.estado = true;
     equipoPrueba.cantSolicitudes = 7;
-    equipoPrueba.categoria = "1";
-    equipoDao.insertarEquipo(equipoPrueba);
+    equipoPrueba.categoria = "4";
+    //equipoDao.insertarEquipo(equipoPrueba);
 
     //para hacer el update
     Equipo equipoPrueba2;
-    equipoPrueba2.nombre = "MediopH";
-    equipoPrueba2.annio = 1990;
-    equipoPrueba2.descripcion = "Usado para medir los medios";
-    equipoPrueba2.minPh = 9;
-    equipoPrueba2.maxPh = 9;
+    equipoPrueba2.nombre = "PruebapH";
+    equipoPrueba2.annio = 1950;
+    equipoPrueba2.descripcion = "Usado para medir los medios bajos en pH";
+    equipoPrueba2.minPh = 4;
+    equipoPrueba2.maxPh = 6;
     equipoPrueba2.estado = false;
     equipoPrueba2.cantSolicitudes = 7;
     equipoPrueba2.categoria = "1";
-   // equipoDao.actualizarEquipo(equipoPrueba2, 3);
+    //cout << gestorEquipos.eliminarEquipo(equipoPrueba2.nombre) << endl;
 
     //para borrar un equipo
     //equipoDao.eliminarEquipo();
 
     //para generar lista ordenada alfabeticamente con los equipos en la base de datos
-    equipoDao.listarEquipos();
+     
+    Equipos listaEquipos = gestorEquipos.listarEquipos();
+
+    //listaEquipos.Imprimir();
+    
+    Equipos lista2 = listaEquipos.ListarEquipos(1, -1);
+    lista2.Imprimir();
+    
     return 0;
 }
 
