@@ -35,7 +35,7 @@ int main() {
     equipoPrueba2.estado = false;
     equipoPrueba2.cantSolicitudes = 7;
     equipoPrueba2.categoria = "1";
-    cout << gestorEquipos.eliminarEquipo(equipoPrueba2.nombre) << endl;
+    //cout << gestorEquipos.eliminarEquipo(equipoPrueba2.nombre) << endl;
 
     //para borrar un equipo
     //equipoDao.eliminarEquipo();
@@ -44,7 +44,10 @@ int main() {
      
     Equipos listaEquipos = gestorEquipos.listarEquipos();
 
-    listaEquipos.Imprimir();
+    //listaEquipos.Imprimir();
+    
+    Equipos lista2 = listaEquipos.ListarEquipos(1, -1);
+    lista2.Imprimir();
     
     return 0;
 }

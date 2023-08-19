@@ -1,4 +1,59 @@
-"C:\Program Files\JetBrains\CLion 2023.1.4\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.1.4/bin/ninja/win/x64/ninja.exe" -G Ninja -S "C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos" -B "C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cmake-build-debug"
+"C:\Program Files\JetBrains\CLion 2023.1.4\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S "C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\ProyectoEstructurasCLion" -B "C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\ProyectoEstructurasCLion\cmake-build-debug"
+-- The C compiler identification is GNU 11.2.0
+-- The CXX compiler identification is GNU 11.2.0
+-- Detecting C compiler ABI info
+CMake Warning in C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Codigo/EstructuraDeDatos/ProyectoEstructurasCLion/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-eo7ub4/CMakeLists.txt:
+  The object file directory
+
+    C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Codigo/EstructuraDeDatos/ProyectoEstructurasCLion/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-eo7ub4/CMakeFiles/cmTC_37ab6.dir/
+
+  has 235 characters.  The maximum full path to an object file is 250
+  characters (see CMAKE_OBJECT_PATH_MAX).  Object file
+
+    CMakeCCompilerABI.c.obj
+
+  cannot be safely placed under this directory.  The build may not work
+  correctly.
+
+
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/JetBrains/CLion 2023.1.4/bin/mingw/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+CMake Warning in C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Codigo/EstructuraDeDatos/ProyectoEstructurasCLion/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pn7glj/CMakeLists.txt:
+  The object file directory
+
+    C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Codigo/EstructuraDeDatos/ProyectoEstructurasCLion/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pn7glj/CMakeFiles/cmTC_09c39.dir/
+
+  has 235 characters.  The maximum full path to an object file is 250
+  characters (see CMAKE_OBJECT_PATH_MAX).  Object file
+
+    CMakeCXXCompilerABI.cpp.obj
+
+  cannot be safely placed under this directory.  The build may not work
+  correctly.
+
+
+-- Detecting CXX compiler ABI info - failed
+-- Check for working CXX compiler: C:/Program Files/JetBrains/CLion 2023.1.4/bin/mingw/bin/g++.exe
+CMake Warning in C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Codigo/EstructuraDeDatos/ProyectoEstructurasCLion/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-incbht/CMakeLists.txt:
+  The object file directory
+
+    C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Codigo/EstructuraDeDatos/ProyectoEstructurasCLion/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-incbht/CMakeFiles/cmTC_f7ad8.dir/
+
+  has 235 characters.  The maximum full path to an object file is 250
+  characters (see CMAKE_OBJECT_PATH_MAX).  Object file
+
+    testCXXCompiler.cxx.obj
+
+  cannot be safely placed under this directory.  The build may not work
+  correctly.
+
+
+-- Check for working CXX compiler: C:/Program Files/JetBrains/CLion 2023.1.4/bin/mingw/bin/g++.exe - works
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Codigo/EstructuraDeDatos/cmake-build-debug
+-- Build files have been written to: C:/Users/caria/OneDrive - Diagnostika/Documentos/U/CENFOTEC/8. Estructuras de Datos/Proyecto Final/Codigo/EstructuraDeDatos/ProyectoEstructurasCLion/cmake-build-debug
