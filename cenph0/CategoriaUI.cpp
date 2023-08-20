@@ -171,4 +171,7 @@ int CategoriaUI::leerOpcionOrden() {
 
 void CategoriaUI::listarCategorias() {
 	Categorias listacategorias = gestorCategorias.listarCategorias();
+	int opcionOrden = leerOpcionOrden();
+	Categorias listaOrdenada = listacategorias.ListarCategorias(opcionOrden);
+	listaOrdenada.Imprimir();
 }

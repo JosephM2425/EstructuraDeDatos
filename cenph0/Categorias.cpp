@@ -1,5 +1,6 @@
 #include "Categorias.h"
 #include <algorithm>
+#include <iostream>
 
 Categorias::Categorias()
 {
@@ -184,7 +185,7 @@ int Categorias::Modificar(string nombre)
     }
 }
 
-Categorias Categorias::ListarCategorias(int param, int orden)
+Categorias Categorias::ListarCategorias(int param)
 {
     //Orden = 1 ordenar ascendentemente
     //Orden = -1 ordenar descendentemente
@@ -268,5 +269,28 @@ Categorias Categorias::CopiarLista()
         return categoriasCopia;
 }
 
+void Categorias::Imprimir()
+{
+    Categoria* actual = inicio;
+    Categoria* inicio = this->inicio;
+    Categoria* final = this->final;
 
+    bool recorridoCompleto = false;
+
+    cout << "==========================================================================" << endl;
+    cout << "||                      Lista de Categorias | cen-ph0                   ||" << endl;
+    cout << "==========================================================================" << endl;
+
+    do
+    {
+        if (actual == final)
+        {
+            recorridoCompleto = true;
+        }
+
+        cout << "Nombre: " << actual->nombre << "\n";
+        cout << "==========================================================================\n";
+        actual = actual->siguiente;
+    } while (!recorridoCompleto && inicio != final);
+}
 

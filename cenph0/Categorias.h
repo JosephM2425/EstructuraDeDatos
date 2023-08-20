@@ -25,8 +25,9 @@ public:
     Categoria Consultar(string nombreCategoria);
     Categoria Inicio();
     Categoria Final();
+    void Imprimir();
     Categorias CopiarLista();
-    Categorias ListarCategorias(int param, int orden);
+    Categorias ListarCategorias(int param);
 };
 
 #endif //ESTRUCTURADEDATOS_CATEGORIAS_H
