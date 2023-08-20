@@ -16,14 +16,6 @@ Conexion::Conexion() {
     driver = sql::mysql::get_mysql_driver_instance();
     con = driver->connect(host, user, password);
     con->setSchema(schema);
-
-    if (con->isValid()) {
-        std::cout << "Connected to MySQL server!" << std::endl;
-    }
-    else {
-        std::cout << "Connection failed!" << std::endl;
-    }
-
 }
 
 Conexion::~Conexion() {

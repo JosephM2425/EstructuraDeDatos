@@ -24,14 +24,12 @@ void EquipoDAO::insertarEquipo(Equipo equipo) {
         stmtEquipo->setString(1, equipo.nombre);
         stmtEquipo->setInt(2, equipo.annio);
         stmtEquipo->setString(3, equipo.descripcion);
-        stmtEquipo->setInt(4, equipo.minPh);
-        stmtEquipo->setInt(5, equipo.maxPh);
+        stmtEquipo->setDouble(4, equipo.minPh);
+        stmtEquipo->setDouble(5, equipo.maxPh);
         stmtEquipo->setBoolean(6, equipo.estado);
         stmtEquipo->setInt(7, equipo.cantSolicitudes);
         stmtEquipo->setInt(8, stoi(equipo.categoria));
         stmtEquipo->execute();
-        std::cout << "se logró" << std::endl;
-
         delete stmtEquipo;
     }
     catch (sql::SQLException& e) {
@@ -46,21 +44,18 @@ void EquipoDAO::insertarEquipo(Equipo equipo) {
 void EquipoDAO::actualizarEquipo(Equipo equipo) {
     try
     {
-        std::string queryEquipo = "UPDATE equipo SET annio=?, descripcion=?, minPh=?, maxPh=?, estado=?, cantSolicitudes=?, idCategoria=? WHERE nombreEquipo=? ";
+        std::string queryEquipo = "UPDATE equipo SET annio=?, descripcion=?, minPh=?, maxPh=?, idCategoria=? WHERE nombreEquipo=? ";
 
         sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
 
         
         stmtEquipo->setInt(1, equipo.annio);
         stmtEquipo->setString(2, equipo.descripcion);
-        stmtEquipo->setInt(3, equipo.minPh);
-        stmtEquipo->setInt(4, equipo.maxPh);
-        stmtEquipo->setBoolean(5, equipo.estado);
-        stmtEquipo->setInt(6, equipo.cantSolicitudes);
-        stmtEquipo->setInt(7, stoi(equipo.categoria));
-        stmtEquipo->setString(8, equipo.nombre);
+        stmtEquipo->setDouble(3, equipo.minPh);
+        stmtEquipo->setDouble(4, equipo.maxPh);
+        stmtEquipo->setInt(5, stoi(equipo.categoria));
+        stmtEquipo->setString(6, equipo.nombre);
         stmtEquipo->execute();
-
         delete stmtEquipo;
     }
     catch (sql::SQLException& e) {
@@ -112,8 +107,8 @@ Equipos EquipoDAO::listarEquipos() {
             nuevo.nombre = res->getString("nombreEquipo");
             nuevo.annio = res->getInt("annio");
             nuevo.descripcion = res->getString("descripcion");
-            nuevo.minPh = res->getInt("minPh");
-            nuevo.maxPh = res->getInt("maxPh");
+            nuevo.minPh = res->getDouble("minPh");
+            nuevo.maxPh = res->getDouble("maxPh");
             nuevo.estado = res->getBoolean("estado");
             nuevo.cantSolicitudes = res->getInt("cantSolicitudes");
             nuevo.categoria = res->getString("nombreCategoria");
