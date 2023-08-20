@@ -24,7 +24,7 @@ public:
 	void modificarCategoria();
 	void eliminarCategoria();
 	int leerOpcionOrden();
-	void listarCategorias();
+	//void listarCategorias();
 };
 
 #endif

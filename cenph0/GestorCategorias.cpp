@@ -56,6 +56,6 @@ bool GestorCategorias::existeCategoria(std::string nombreCategoria) {
 	return categoriaDAO.existeCategoria(nombreCategoria);
 }
 
-Categorias GestorCategorias::listarCategorias() {
-	return categoriaDAO.listarCategorias();
-}
+//categorias gestorcategorias::listarcategorias() {
+//	return categoriadao.listarcategorias();
+//}
