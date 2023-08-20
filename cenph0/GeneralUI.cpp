@@ -2,7 +2,9 @@
 #include <string>
 #include "GeneralUI.h"
 #include "EquipoUI.h"
+#include "CategoriaUI.h"
 #include "AuxiliarUI.h"
+
 
 using namespace std;
 
@@ -22,7 +24,7 @@ void GeneralUI::menuGeneral(int opcion) {
 	break;
 	case 2:
 	{
-
+		categoriaUI.menuCategoriasCompleto();
 	}
 	break;
 	case 3:

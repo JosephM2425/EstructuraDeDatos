@@ -7,7 +7,7 @@
 int main() {
     GestorEquipos gestorEquipos;
     GeneralUI generalUI;
-
+    GestorCategorias gestorCategorias;
     generalUI.menuGeneralCompleto();
     
     return 0;
