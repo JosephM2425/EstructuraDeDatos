@@ -2,52 +2,13 @@
 //
 
 #include <iostream>
-#include <mysql_driver.h>
-#include <mysql_connection.h>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-#include "GestorEquipos.h"
+#include "GeneralUI.h"
 
 int main() {
     GestorEquipos gestorEquipos;
+    GeneralUI generalUI;
 
-    // Call methods
-    Equipo equipoPrueba;
-    equipoPrueba.nombre = "TestpH";
-    equipoPrueba.annio = 1999;
-    equipoPrueba.descripcion = "Usado para medir la exactitud del balance de pH";
-    equipoPrueba.minPh = 1;
-    equipoPrueba.maxPh = 7;
-    equipoPrueba.estado = true;
-    equipoPrueba.cantSolicitudes = 7;
-    equipoPrueba.categoria = "4";
-    //equipoDao.insertarEquipo(equipoPrueba);
-
-    //para hacer el update
-    Equipo equipoPrueba2;
-    equipoPrueba2.nombre = "PruebapH";
-    equipoPrueba2.annio = 1950;
-    equipoPrueba2.descripcion = "Usado para medir los medios bajos en pH";
-    equipoPrueba2.minPh = 4;
-    equipoPrueba2.maxPh = 6;
-    equipoPrueba2.estado = false;
-    equipoPrueba2.cantSolicitudes = 7;
-    equipoPrueba2.categoria = "1";
-    //cout << gestorEquipos.eliminarEquipo(equipoPrueba2.nombre) << endl;
-
-    //para borrar un equipo
-    //equipoDao.eliminarEquipo();
-
-    //para generar lista ordenada alfabeticamente con los equipos en la base de datos
-     
-    Equipos listaEquipos = gestorEquipos.listarEquipos();
-
-    //listaEquipos.Imprimir();
-    
-    Equipos lista2 = listaEquipos.ListarEquipos(1, -1);
-    lista2.Imprimir();
+    generalUI.menuGeneralCompleto();
     
     return 0;
 }

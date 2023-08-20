@@ -1,5 +1,5 @@
-#ifndef ESTRUCTURADEDATOS_CATEGORIA_H
-#define ESTRUCTURADEDATOS_CATEGORIA_H
+#ifndef CATEGORIA_H
+#define CATEGORIA_H
 
 #include <string>
 

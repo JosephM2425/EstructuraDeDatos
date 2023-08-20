@@ -17,7 +17,7 @@ Equipos::Equipos()
     final = nullptr;
 }
 
-int Equipos::AgregarAnnio(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh, bool estado, int cantSolicitudes) {
+int Equipos::AgregarAnnio(string nombre, int annio, string descripcion, string categoria, double maxPh, double minPh, bool estado, int cantSolicitudes) {
     Equipo* nuevo = new Equipo();
     nuevo->nombre = nombre;
     nuevo->annio = annio;
@@ -319,7 +319,7 @@ Equipo Equipos::Consultar(string nombreEquipo) {
     }
 }
 
-int Equipos::Modificar(string nombre, int annio, string descripcion, string categoria, int maxPh, int minPh, bool estado, int cantSolicitudes) {
+int Equipos::Modificar(string nombre, int annio, string descripcion, string categoria, double maxPh, double minPh, bool estado, int cantSolicitudes) {
     //Lista vacia
     if (inicio == nullptr) {
         return 0;
@@ -400,6 +400,11 @@ void Equipos::Imprimir()
     Equipo* final = this->final;
 
     bool recorridoCompleto = false;
+
+    cout << "==========================================================================" << endl;
+    cout << "||                      Lista de Equipos | cen-ph0                      ||" << endl;
+    cout << "==========================================================================" << endl;
+
     do
     {
         if (actual == final)
@@ -408,14 +413,14 @@ void Equipos::Imprimir()
         }
 
         cout << "Nombre: " << actual->nombre << "\n";
-        cout << "Annio: " << actual->annio << "\n";
-        //cout << "Descripcion: " << actual->descripcion << "\n";
-        //cout << "Categoria: " << actual->categoria << "\n";
-        //cout << "Max pH: " << actual->maxPh << "\n";
-        //cout << "Min pH: " << actual->minPh << "\n";
-        //cout << "Estado: " << actual->estado << "\n";
-        //cout << "Cantidad de solicitudes: " << actual->cantSolicitudes << "\n";
-        cout << "\n";
+        cout << "Anio: " << actual->annio << "\n";
+        cout << "Descripcion: " << actual->descripcion << "\n";
+        cout << "Categoria: " << actual->categoria << "\n";
+        cout << "Max pH: " << actual->maxPh << "\n";
+        cout << "Min pH: " << actual->minPh << "\n";
+        cout << "Estado: " << actual->estado << "\n";
+        cout << "Cantidad de solicitudes: " << actual->cantSolicitudes << "\n";
+        cout << "==========================================================================\n";
         actual = actual->siguiente;
     } while (!recorridoCompleto && inicio != final);
 }

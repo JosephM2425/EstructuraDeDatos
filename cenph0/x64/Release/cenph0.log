@@ -1,5 +1,7 @@
-﻿  cenph0.cpp
-Categorias.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/OPT:ICF'
+﻿  EquipoDAO.cpp
+C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\EquipoDAO.cpp(130): warning C4715: 'EquipoDAO::listarEquipos': no todas las rutas de acceso de control devuelven un valor
+C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\EquipoDAO.cpp(161): warning C4715: 'EquipoDAO::existeEquipo': no todas las rutas de acceso de control devuelven un valor
+AuxiliarUI.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/OPT:ICF'
      Creando biblioteca C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.lib y objeto C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.exp
   LINK : se especificó /LTCG pero no se requiere generación de código; quite /LTCG de la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 mysqlcppconn-static.lib(mysql_driver.obj) : warning LNK4099: no se encontró PDB '' con 'mysqlcppconn-static.lib(mysql_driver.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración

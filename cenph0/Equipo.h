@@ -1,5 +1,5 @@
-#ifndef ESTRUCTURADEDATOS_EQUIPO_H
-#define ESTRUCTURADEDATOS_EQUIPO_H
+#ifndef EQUIPO_H
+#define EQUIPO_H
 
 #include <string>
 #include "Categoria.h"
@@ -14,8 +14,8 @@ public:
     int annio;
     string descripcion;
     string categoria; //como prueba
-    int maxPh;
-    int minPh;
+    double maxPh;
+    double minPh;
     bool estado;
     int cantSolicitudes;
     Equipo* siguiente;
