@@ -193,10 +193,10 @@ Categorias Categorias::ListarCategorias(int param)
     Categorias categoriasOrdenados; //Lista auxiliar
     bool recorridoCompleto = false;
 
-    if (param == 1 && orden == 1) { //Ordenar por nombre ascendentemente
+    if (param == 1) { //Ordenar por nombre ascendentemente
         categoriasOrdenados = CopiarLista();
     }
-    else if (param == 1 && orden == -1) //Ordenar por nombre descendentemente
+    else if (param == -1) //Ordenar por nombre descendentemente
     {
         Categoria* actual = final;
         do
