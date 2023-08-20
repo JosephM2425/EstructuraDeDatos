@@ -14,7 +14,7 @@ private:
     CategoriaDAO categoriaDAO;
 public:
     int insertarCategoria(Categoria categoria);
-    int actualizarCategoria(Categoria categoria);
+    int actualizarCategoria(Categoria categoria, Categoria nuevaCategoria);
     int eliminarCategoria(std::string nombreCategoria);
     bool existeCategoria(std::string nombreCategoria);
     //Categorias listarCategorias();

@@ -61,10 +61,17 @@ void CategoriaUI::menuCategoriasCompleto() {
 }
 
 string CategoriaUI::leerNombreCategoria() {
-	cout << "Digite el nombre de la categoría: ";
 	string nombre;
 	getline(cin, nombre);
-	return nombre;
+	if (nombre!="")
+	{
+		return nombre;
+	}
+	else
+	{
+		cout << "Digite el nombre de la categoria: ";
+		return leerNombreCategoria();
+	}
 }
 void CategoriaUI::registrarCategoria() {
 	Categoria categoria;
@@ -74,13 +81,13 @@ void CategoriaUI::registrarCategoria() {
 		categoria.nombre = nombre;
 		resultado = gestorCategorias.insertarCategoria(categoria);
 		if (resultado == 1) {
-			cout << "Ya existe una categoría con ese nombre. Por favor digite otro nombre." << endl;
+			cout << "Ya existe una categoria con ese nombre. Por favor digite otro nombre." << endl;
 		}
 		else if (resultado == 2) {
 			cout << "Ocurrio un error al registrar la categoría. Por favor intentelo de nuevo." << endl;
 		}
 		else {
-			cout << "La categoría se registró exitosamente." << endl;
+			cout << "La categoria se registro exitosamente." << endl;
 		}
 	} while (resultado != 0);
 }
@@ -88,6 +95,7 @@ void CategoriaUI::registrarCategoria() {
 void CategoriaUI::modificarCategoria() {
 	Categoria categoria;
 	string nombre;
+	Categoria nuevaCategoria;
 	int resultado;
 	bool existeCategoria;
 	do {
@@ -98,9 +106,11 @@ void CategoriaUI::modificarCategoria() {
 				cout << "No existe una categoria con ese nombre. Por favor digite otro nombre." << endl;
 			}
 		} while (!existeCategoria);
-
 		categoria.nombre = nombre;
-		resultado = gestorCategorias.actualizarCategoria(categoria);
+		cout << "Digite el nuevo nombre de la categoria: ";
+		nombre=leerNombreCategoria();
+		nuevaCategoria.nombre = nombre;
+		resultado = gestorCategorias.actualizarCategoria(categoria, nuevaCategoria);
 		if (resultado == 1) {
 			cout << "No existe una categoria con ese nombre. Por favor digite otro nombre." << endl;
 		}

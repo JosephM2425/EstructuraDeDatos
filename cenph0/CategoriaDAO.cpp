@@ -17,7 +17,7 @@ CategoriaDAO::CategoriaDAO(){
 
 void CategoriaDAO::insertarCategoria(Categoria categoria){
 	try{
-		std::string queryCategoria = "INSERT INTO categorias (nombre) VALUES (?)";
+		std::string queryCategoria = "INSERT INTO categoria (nombreCategoria) VALUES (?)";
 
 		sql::PreparedStatement* stmtCategoria = con->prepareStatement(queryCategoria);
 
@@ -35,13 +35,13 @@ void CategoriaDAO::insertarCategoria(Categoria categoria){
 	}
 }
 
-void CategoriaDAO::actualizarCategoria(Categoria categoria){
+void CategoriaDAO::actualizarCategoria(Categoria categoria, Categoria nuevaCategoria){
 	try{
-		std::string queryCategoria = "UPDATE categorias SET nombre = ? WHERE nombre = ?";
+		std::string queryCategoria = "UPDATE categoria SET nombreCategoria = ? WHERE nombreCategoria = ?";
 
 		sql::PreparedStatement* stmtCategoria = con->prepareStatement(queryCategoria);
 
-		stmtCategoria->setString(1,categoria.nombre);
+		stmtCategoria->setString(1,nuevaCategoria.nombre);
 		stmtCategoria->setString(2,categoria.nombre);
 		stmtCategoria->execute();
 		delete stmtCategoria;
@@ -58,7 +58,7 @@ void CategoriaDAO::actualizarCategoria(Categoria categoria){
 
 void CategoriaDAO::eliminarCategoria(std::string nombreCategoria){
 	try{
-		std::string queryCategoria = "DELETE FROM categorias WHERE nombre = ?";
+		std::string queryCategoria = "DELETE FROM categoria WHERE nombreCategoria = ?";
 
 		sql::PreparedStatement* stmtCategoria = con->prepareStatement(queryCategoria);
 

@@ -36,13 +36,13 @@ int GestorCategorias::eliminarCategoria(std::string nombreCategoria) {
 	}
 }
 
-int GestorCategorias::actualizarCategoria(Categoria categoria) {
+int GestorCategorias::actualizarCategoria(Categoria categoria, Categoria nuevaCategoria) {
 	try {
 		if (!existeCategoria(categoria.nombre)) {
 			return 1;
 		}
 		else {
-			categoriaDAO.actualizarCategoria(categoria);
+			categoriaDAO.actualizarCategoria(categoria, nuevaCategoria);
 			return 0;
 		}
 	}
