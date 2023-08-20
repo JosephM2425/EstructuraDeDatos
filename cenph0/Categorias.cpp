@@ -5,6 +5,12 @@ Categorias::Categorias() {}
 
 Categorias::Categorias(Categoria *inicio, Categoria *final) : inicio(inicio), final(final) {}
 
+Categorias::Categorias()
+{
+    inicio = nullptr;
+    final = nullptr;
+}
+
 int Categorias::Agregar(string nombre)
 {
     Categoria* nuevo = new Categoria();
@@ -182,25 +188,88 @@ int Categorias::Modificar(string nombre)
     }
 }
 
-//categorias categorias::listarcategoriaasc(categorias& lista)
-//{
-//	categoria* actual = lista.inicio;
-//	while (actual != nullptr)
-//    {
-//        cout << actual->nombre << endl;
-//        actual = actual->siguiente;
-//    }
-//}
+Categorias Categorias::ListarCategorias(int param, int orden)
+{
+    //Orden = 1 ordenar ascendentemente
+    //Orden = -1 ordenar descendentemente
 
-//categorias categorias::listarcategoriadesc(categorias& lista)
-//{
-//	categoria* actual = lista.final;
-//	while (actual != nullptr)
-//    {
-//        cout << actual->nombre << endl;
-//        actual = actual->siguiente;
-//    }
-//}
+    Categorias categoriasOrdenados; //Lista auxiliar
+    bool recorridoCompleto = false;
+
+    if (param == 1 && orden == 1) { //Ordenar por nombre ascendentemente
+        categoriasOrdenados = CopiarLista();
+    }
+    else if (param == 1 && orden == -1) //Ordenar por nombre descendentemente
+    {
+        Categoria* actual = final;
+        do
+        {
+            if (actual == inicio) {
+                recorridoCompleto = true;
+            }
+
+            Categoria* nuevo = new Categoria();
+            nuevo->nombre = actual->nombre;
+            nuevo->anterior = nullptr;
+            nuevo->siguiente = nullptr;
+
+            //Si la lista está vacía
+            if (categoriasOrdenados.inicio == nullptr) {
+                categoriasOrdenados.inicio = nuevo;
+                categoriasOrdenados.final = nuevo;
+            }
+            else //Si ya tiene algún nodo
+            {
+                nuevo->anterior = categoriasOrdenados.final;
+                nuevo->siguiente = categoriasOrdenados.inicio;
+                categoriasOrdenados.final->siguiente = nuevo;
+                categoriasOrdenados.final = nuevo;
+            }
+
+            actual = actual->anterior;
+        } while (!recorridoCompleto && inicio != final);
+    }
+}
+
+Categorias Categorias::CopiarLista() 
+{
+        Categorias categoriasCopia; //Lista auxiliar
+        Categoria* actual = inicio; //nodo actual de lista original
+        bool recorridoCompleto = false;
+        //Para hacer una copia de la lista
+        do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            //Lista vacia
+            if (inicio == nullptr) {
+                //no se hace nada
+            }
+            else//Lista con nodos
+            {
+                Categoria* nuevo = new Categoria();
+                nuevo->nombre = actual->nombre;
+                nuevo->anterior = nullptr;
+                nuevo->siguiente = nullptr;
+
+                //Si la lista está vacía
+                if (categoriasCopia.inicio == nullptr) {
+                    categoriasCopia.inicio = nuevo;
+                    categoriasCopia.final = nuevo;
+                }
+                else //Si ya tiene algún nodo
+                {
+                    nuevo->anterior = categoriasCopia.final;
+                    nuevo->siguiente = categoriasCopia.inicio;
+                    categoriasCopia.final->siguiente = nuevo;
+                    categoriasCopia.final = nuevo;
+                }
+            }
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+        return categoriasCopia;
+}
 
 
 

@@ -25,8 +25,8 @@ public:
     Categoria Consultar(string nombreCategoria);
     Categoria Inicio();
     Categoria Final();
-    //Categorias listarCategoriaAsc();
-    //Categorias listarCategoriaDesc();
+    Categorias CopiarLista();
+    Categorias ListarCategorias(int param, int orden);
 };
 
 #endif //ESTRUCTURADEDATOS_CATEGORIAS_H

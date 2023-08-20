@@ -23,7 +23,7 @@ public:
     void insertarCategoria(Categoria categoria);
     void actualizarCategoria(Categoria categoria, Categoria nuevaCategoria);
     void eliminarCategoria(std::string nombreCategoria);
-    //Categorias listarCategorias();
+    Categorias listarCategorias();
     bool existeCategoria(std::string nombre);
 };
 

@@ -76,38 +76,38 @@ void CategoriaDAO::eliminarCategoria(std::string nombreCategoria){
 	}
 }
 
-//
-//Categorias CategoriaDAO::listarCategorias(){
-//	try{
-//		std::string queryCategoria = "SELECT * FROM categorias";
-//
-//		sql::PreparedStatement* stmtCategoria = con->prepareStatement(queryCategoria);
-//
-//		sql::ResultSet* res = stmtCategoria->executeQuery();
-//
-//		//Instanciando la lista donde se guardarán las categorias de la base de datos
-//		Categorias listaCategorias;
-//
-//		while(res->next()){
-//			std::string nombre;
-//			nombre = res->getString("nombre");
-//			
-//			//Agregando la nueva categoria a la lista
-//			listaCategorias.Agregar(nombre);
-//		}
-//		delete stmtCategoria;
-//		delete res;
-//		return listaCategorias;
-//
-//	}
-//	catch (sql::SQLException& e) {
-//		std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
-//	}
-//	catch (std::runtime_error& e) {
-//		std::cerr << "Runtime Error: " << e.what() << std::endl;
-//
-//	}
-//}
+
+Categorias CategoriaDAO::listarCategorias(){
+	try{
+		std::string queryCategoria = "SELECT * FROM categoria";
+
+		sql::PreparedStatement* stmtCategoria = con->prepareStatement(queryCategoria);
+
+		sql::ResultSet* res = stmtCategoria->executeQuery();
+
+		//Instanciando la lista donde se guardarán las categorias de la base de datos
+		Categorias listaCategorias;
+
+		while(res->next()){
+			std::string nombre;
+			nombre = res->getString("nombre");
+			
+			//Agregando la nueva categoria a la lista
+			listaCategorias.Agregar(nombre);
+		}
+		delete stmtCategoria;
+		delete res;
+		return listaCategorias;
+
+	}
+	catch (sql::SQLException& e) {
+		std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+	}
+	catch (std::runtime_error& e) {
+		std::cerr << "Runtime Error: " << e.what() << std::endl;
+
+	}
+}
 
 bool CategoriaDAO::existeCategoria(std::string nombre) {
 	try {
