@@ -1,10 +1,6 @@
 #include "Categorias.h"
 #include <algorithm>
 
-Categorias::Categorias() {}
-
-Categorias::Categorias(Categoria *inicio, Categoria *final) : inicio(inicio), final(final) {}
-
 Categorias::Categorias()
 {
     inicio = nullptr;
@@ -229,6 +225,7 @@ Categorias Categorias::ListarCategorias(int param, int orden)
             actual = actual->anterior;
         } while (!recorridoCompleto && inicio != final);
     }
+    return categoriasOrdenados;
 }
 
 Categorias Categorias::CopiarLista() 

@@ -38,7 +38,7 @@ void CategoriaUI::menuCategorias(int opcion) {
 	case 4:
 	{
 		auxiliarUI.encabezado();
-		//listarCategorias();
+		listarCategorias();
 	}
 	break;
 	case 5:
@@ -169,7 +169,6 @@ int CategoriaUI::leerOpcionOrden() {
 	return opcionOrden;
 }
 
-//void CategoriaUI::listarCategorias() {
-//	Categorias listaCategorias = gestorCategorias.listarCategorias();
-//	listaCategorias.listarCategoriaAsc();
-//}
+void CategoriaUI::listarCategorias() {
+	Categorias listacategorias = gestorCategorias.listarCategorias();
+}

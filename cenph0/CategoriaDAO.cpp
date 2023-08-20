@@ -90,7 +90,7 @@ Categorias CategoriaDAO::listarCategorias(){
 
 		while(res->next()){
 			std::string nombre;
-			nombre = res->getString("nombre");
+			nombre = res->getString("nombreCategoria");
 			
 			//Agregando la nueva categoria a la lista
 			listaCategorias.Agregar(nombre);

@@ -12,7 +12,6 @@
 class CategoriaUI{
 private:
 	GestorCategorias gestorCategorias;
-	//GeneralUI generalUI;
 	AuxiliarUI auxiliarUI;
 
 public:
@@ -24,7 +23,7 @@ public:
 	void modificarCategoria();
 	void eliminarCategoria();
 	int leerOpcionOrden();
-	//void listarCategorias();
+	void listarCategorias();
 };
 
 #endif

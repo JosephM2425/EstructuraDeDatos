@@ -17,7 +17,7 @@ public:
     int actualizarCategoria(Categoria categoria, Categoria nuevaCategoria);
     int eliminarCategoria(std::string nombreCategoria);
     bool existeCategoria(std::string nombreCategoria);
-    //Categorias listarCategorias();
+    Categorias listarCategorias();
 };
 
 #endif
