@@ -80,18 +80,17 @@ void EquipoUI::menuEquipos(int opcion)
 	case 9:
 	{
 		auxiliarUI.encabezado();
-		alquilarEquiipo();
+		alquilarEquipo();
 	}
 	break;
 	case 10:
 	{
 		auxiliarUI.encabezado();
+		devolverEquipo();
 	}
 	break;
 	case 11:
 	{
-		auxiliarUI.menuGeneralCompleto();
-
 	}
 	break;
 	default:
@@ -233,29 +232,32 @@ void EquipoUI::modificarEquipo()
 	} while (resultado != 0);
 }
 
-void EquipoUI::alquilarEquiipo()
+void EquipoUI::alquilarEquipo()
 {
 	Equipo equipo;
 	string nombre;
 	int resultado;
 	bool equipoDisponible;
 	int cantSolicitudes;
+	bool existeEquipo;
 
-	listarEquiposPorEstado(0);
+	listarEquiposPorEstado(false);
 
 	do
 	{
 		nombre = leerNombreEquipo();
+		existeEquipo = gestorEquipos.existeEquipo(nombre);
 		equipoDisponible = gestorEquipos.equipoDisponible(nombre);
 		if (!equipoDisponible)
 		{
 			cout << "No hay un equipo disponible con ese nombre. Por favor digite otro nombre: ";
 		}
-	} while (!equipoDisponible);
+	} while (!equipoDisponible || !existeEquipo);
 
 	cantSolicitudes = gestorEquipos.cantSolicitudes(nombre);
 
 	equipo.nombre = nombre;
+	equipo.estado = true;
 	equipo.cantSolicitudes = cantSolicitudes + 1;
 	resultado = gestorEquipos.alquilerEquipo(equipo);
 
@@ -266,6 +268,44 @@ void EquipoUI::alquilarEquiipo()
 	else
 	{
 		cout << "El equipo se alquilo exitosamente." << endl;
+	}
+}
+
+void EquipoUI::devolverEquipo()
+{
+	Equipo equipo;
+	string nombre;
+	int resultado;
+	bool equipoDisponible;
+	bool existeEquipo;
+	int cantSolicitudes;
+
+	listarEquiposPorEstado(true);
+
+	do
+	{
+		nombre = leerNombreEquipo();
+		existeEquipo = gestorEquipos.existeEquipo(nombre);
+		equipoDisponible = gestorEquipos.equipoDisponible(nombre);
+		if (equipoDisponible)
+		{
+			cout << "No hay un equipo alquilado con ese nombre. Por favor digite otro nombre: ";
+		}
+	} while (equipoDisponible || !existeEquipo);
+
+	cantSolicitudes = gestorEquipos.cantSolicitudes(nombre);
+	equipo.nombre = nombre;
+	equipo.cantSolicitudes = cantSolicitudes;
+	equipo.estado = false;
+	resultado = gestorEquipos.alquilerEquipo(equipo);
+
+	if (resultado == 2)
+	{
+		cout << "Ocurrio un error al devolver el equipo. Por favor intentelo de nuevo." << endl;
+	}
+	else
+	{
+		cout << "El equipo se devolvio exitosamente." << endl;
 	}
 }
 
@@ -434,7 +474,7 @@ int EquipoUI::leerAnioInicial()
 {
 
 	cout << "Digite el anio inicial del rango a buscar: ";
-	int anioInicial= 0;
+	int anioInicial = 0;
 	anioInicial = auxiliarUI.leerNumero();
 	return anioInicial;
 }
@@ -447,11 +487,11 @@ int EquipoUI::leerAnioFinal()
 	return anioFinal;
 }
 
-
-void EquipoUI::listarEquiposPorHilera() {
+void EquipoUI::listarEquiposPorHilera()
+{
 
 	Equipos listaEquipos = gestorEquipos.listarEquipos();
 	string hileraC = leerHileraCaracteres();
-	Equipos listaOrdenadaHilera = listaEquipos.ListarEquiposBuscarHilera(hileraC);
+	Equipos listaOrdenadaHilera = listaEquipos.ListarEquiposBuscarNombre(hileraC);
 	listaOrdenadaHilera.Imprimir();
 }

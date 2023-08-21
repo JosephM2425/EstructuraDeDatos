@@ -79,7 +79,7 @@ void EquipoDAO::alquilerEquipo(Equipo equipo) {
         sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
 
 
-        stmtEquipo->setBoolean(1, 1);
+        stmtEquipo->setBoolean(1, equipo.estado);
         stmtEquipo->setInt(2, equipo.cantSolicitudes);
         stmtEquipo->setString(3, equipo.nombre);
         stmtEquipo->execute();

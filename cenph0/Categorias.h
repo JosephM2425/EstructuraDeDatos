@@ -17,7 +17,7 @@ public:
     int Agregar(Categoria categoria);
     int Retirar(string nombreCategoria);
     Categoria Consultar(string nombreCategoria);
-    int Modificar(string nombre);
+    int Modificar(string nombre, string nuevoNombre);
     Categoria Inicio();
     Categoria Final();
     void Imprimir();

@@ -320,7 +320,7 @@ Equipo Equipos::Consultar(string nombreEquipo) {
     }
 }
 
-int Equipos::Modificar(string nombre, int annio, string descripcion, Categoria categoria, double maxPh, double minPh, bool estado, int cantSolicitudes) {
+int Equipos::Modificar(Equipo equipo) {
     //Lista vacia
     if (inicio == nullptr) {
         return 0;
@@ -329,7 +329,7 @@ int Equipos::Modificar(string nombre, int annio, string descripcion, Categoria c
     else {
         //Recorro la lista para ver si existe el equipo
         Equipo* actual = inicio;
-        string nombreNuevoStr = nombre;
+        string nombreNuevoStr = equipo.nombre;
         transform(nombreNuevoStr.begin(), nombreNuevoStr.end(), nombreNuevoStr.begin(), ::tolower);
         const char* nombreNuevo = nombreNuevoStr.data();
         bool recorridoCompleto = false;
@@ -345,13 +345,13 @@ int Equipos::Modificar(string nombre, int annio, string descripcion, Categoria c
 
             //Si el nombre del equipo nuevo es igual al nombre del equipo actual
             if (strcmp(nombreNuevo, nombreActual) == 0) {
-                actual->annio = annio;
-                actual->descripcion = descripcion;
-                actual->categoria = categoria;
-                actual->maxPh = maxPh;
-                actual->minPh = minPh;
-                actual->estado = estado;
-                actual->cantSolicitudes = cantSolicitudes;
+                actual->annio = equipo.annio;
+                actual->descripcion = equipo.descripcion;
+                actual->categoria = equipo.categoria;
+                actual->maxPh = equipo.maxPh;
+                actual->minPh = equipo.minPh;
+                actual->estado = equipo.estado;
+                actual->cantSolicitudes = equipo.cantSolicitudes;
                 return 1;
             }
             else {

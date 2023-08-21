@@ -197,7 +197,7 @@ Categoria Categorias::Final()
     return *final;
 }
 
-int Categorias::Modificar(string nombre)
+int Categorias::Modificar(string nombre, string nuevoNombre)
 {
     //Lista vacia
     if (inicio == nullptr) {
@@ -223,7 +223,7 @@ int Categorias::Modificar(string nombre)
 
             //Si el nombre del equipo nuevo es igual al nombre del equipo actual
             if (strcmp(nombreNuevo, nombreActual) == 0) {
-                actual->nombre = nombre;
+                actual->nombre = nuevoNombre;
                 return 1;
             }
             else {
@@ -333,15 +333,22 @@ void Categorias::Imprimir()
     cout << "||                      Lista de Categorias | cen-ph0                   ||" << endl;
     cout << "==========================================================================" << endl;
 
-    do
+    if (inicio == nullptr)
     {
-        if (actual == final)
+		cout << "No hay categorias registradas" << endl;
+	}
+    else
+    {
+        do
         {
-            recorridoCompleto = true;
-        }
-        cout << "Nombre: " << actual->nombre << "\n";
-        cout << "==========================================================================\n";
-        actual = actual->siguiente;
-    } while (!recorridoCompleto && inicio != final);
+            if (actual == final)
+            {
+                recorridoCompleto = true;
+            }
+            cout << "Nombre: " << actual->nombre << "\n";
+            cout << "==========================================================================\n";
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+    }
 }
 

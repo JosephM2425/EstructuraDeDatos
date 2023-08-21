@@ -14,18 +14,17 @@ private:
     Equipo* inicio;
     Equipo* final;
     int AgregarAnnio(string nombre, int annio, string descripcion, Categoria categoria, double maxPh, double minPh, bool estado, int cantSolicitudes);
-
+    Equipos CopiarLista();
 public:
     Equipos();
     int Agregar(Equipo nuevo);
     int Retirar(string nombreEquipo);
-    int Modificar(string nombre, int annio, string descripcion, Categoria categoria, double maxPh, double minPh, bool estado, int cantSolicitudes);
+    int Modificar(Equipo equipo);
     Equipo Consultar(string nombreEquipo);
     Equipo Inicio();
     Equipo Final();
     int Cantidad();
     void Imprimir();
-    Equipos CopiarLista();
     Equipos ListarEquipos(int param, int orden);
     Equipos ListarEquiposBuscarHilera(std::string hilera);
     Equipos ListarEquiposBuscarNombre(string hilera);
