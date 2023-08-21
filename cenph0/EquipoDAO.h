@@ -13,11 +13,14 @@
 #include "Equipo.h"
 #include "Equipos.h"
 #include "Conexion.h"
+#include "Categoria.h"
+#include "CategoriaDAO.h"
 
 class EquipoDAO {
 private:
     Conexion conexion;
     sql::Connection* con;
+    CategoriaDAO categoriaDAO;
 public:
     EquipoDAO();
     void insertarEquipo(Equipo equipo);
@@ -25,7 +28,11 @@ public:
     void alquilerEquipo(Equipo equipo);
     void eliminarEquipo(std::string nombreEquipo);
     Equipos listarEquipos();
+    Equipos listarEquiposPorEstado(bool estado);
+    Equipos listarEquiposPorCategoria(std::string nombreCategoria);
     bool existeEquipo(std::string nombre);
+    bool equipoDisponible(std::string nombre);
+    int cantSolicitudes(std::string nombre);
 };
 
 #endif

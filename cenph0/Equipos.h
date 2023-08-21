@@ -13,13 +13,13 @@ class Equipos
 private:
     Equipo* inicio;
     Equipo* final;
-    int AgregarAnnio(string nombre, int annio, string descripcion, string categoria, double maxPh, double minPh, bool estado, int cantSolicitudes);
+    int AgregarAnnio(string nombre, int annio, string descripcion, Categoria categoria, double maxPh, double minPh, bool estado, int cantSolicitudes);
 
 public:
     Equipos();
     int Agregar(Equipo nuevo);
     int Retirar(string nombreEquipo);
-    int Modificar(string nombre, int annio, string descripcion, string categoria, double maxPh, double minPh, bool estado, int cantSolicitudes);
+    int Modificar(string nombre, int annio, string descripcion, Categoria categoria, double maxPh, double minPh, bool estado, int cantSolicitudes);
     Equipo Consultar(string nombreEquipo);
     Equipo Inicio();
     Equipo Final();

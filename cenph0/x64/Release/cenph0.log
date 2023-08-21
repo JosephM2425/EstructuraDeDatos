@@ -1,19 +1,4 @@
-﻿  CategoriaDAO.cpp
-  CategoriaUI.cpp
-  Categorias.cpp
-  Conexion.cpp
-  EquipoDAO.cpp
-  EquipoUI.cpp
-  Equipos.cpp
-  GeneralUI.cpp
-  GestorCategorias.cpp
-  GestorEquipos.cpp
-  cenph0.cpp
-  Generando código...
-C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\EquipoDAO.cpp(184): warning C4715: 'EquipoDAO::existeEquipo': no todas las rutas de acceso de control devuelven un valor
-C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\EquipoDAO.cpp(153): warning C4715: 'EquipoDAO::listarEquipos': no todas las rutas de acceso de control devuelven un valor
-C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\CategoriaDAO.cpp(111): warning C4715: 'CategoriaDAO::listarCategorias': no todas las rutas de acceso de control devuelven un valor
-C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\CategoriaDAO.cpp(142): warning C4715: 'CategoriaDAO::existeCategoria': no todas las rutas de acceso de control devuelven un valor
+﻿  Equipos.cpp
 AuxiliarUI.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/OPT:ICF'
      Creando biblioteca C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.lib y objeto C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.exp
   LINK : se especificó /LTCG pero no se requiere generación de código; quite /LTCG de la línea de comandos de vínculo para mejorar el rendimiento del vinculador

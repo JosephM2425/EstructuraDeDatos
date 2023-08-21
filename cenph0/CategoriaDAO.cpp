@@ -90,7 +90,6 @@ Categorias CategoriaDAO::listarCategorias(){
 
 		while(res->next()){
 			Categoria categoria;
-			categoria.id = res->getInt("idCategoria");
 			categoria.nombre = res->getString("nombreCategoria");
 			
 			//Agregando la nueva categoria a la lista
@@ -132,6 +131,32 @@ bool CategoriaDAO::existeCategoria(std::string nombre) {
 		}
 
 		return existeCategoria;
+	}
+	catch (sql::SQLException& e) {
+		std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+	}
+	catch (std::runtime_error& e) {
+		std::cerr << "Runtime Error: " << e.what() << std::endl;
+	}
+}
+
+int CategoriaDAO::obtenerIdCategoria(std::string nombre) {
+	try {
+		int idCategoria;
+
+		std::string queryCategoria = "SELECT idCategoria FROM categoria WHERE nombreCategoria = ?;";
+		sql::PreparedStatement* stmtCategoria = con->prepareStatement(queryCategoria);
+		stmtCategoria->setString(1, nombre);
+		sql::ResultSet* res = stmtCategoria->executeQuery();
+
+		while (res->next()) {
+			idCategoria = res->getInt("idCategoria");
+		}
+
+		delete res;
+		delete stmtCategoria;
+
+		return idCategoria;
 	}
 	catch (sql::SQLException& e) {
 		std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;

@@ -9,6 +9,8 @@
 #include "EquipoDAO.h"
 #include "Equipos.h"
 #include "Conexion.h"
+#include "Categoria.h"
+#include "CategoriaDAO.h"
 
 EquipoDAO::EquipoDAO() {
     con = conexion.obtenerConexion();
@@ -28,7 +30,8 @@ void EquipoDAO::insertarEquipo(Equipo equipo) {
         stmtEquipo->setDouble(5, equipo.maxPh);
         stmtEquipo->setBoolean(6, equipo.estado);
         stmtEquipo->setInt(7, equipo.cantSolicitudes);
-        stmtEquipo->setInt(8, stoi(equipo.categoria));
+        int idCategoria = categoriaDAO.obtenerIdCategoria(equipo.categoria.nombre);
+        stmtEquipo->setInt(8, idCategoria);
         stmtEquipo->execute();
         delete stmtEquipo;
     }
@@ -53,7 +56,8 @@ void EquipoDAO::actualizarEquipo(Equipo equipo) {
         stmtEquipo->setString(2, equipo.descripcion);
         stmtEquipo->setDouble(3, equipo.minPh);
         stmtEquipo->setDouble(4, equipo.maxPh);
-        stmtEquipo->setInt(5, stoi(equipo.categoria));
+        int idCategoria = categoriaDAO.obtenerIdCategoria(equipo.categoria.nombre);
+        stmtEquipo->setInt(5, idCategoria);
         stmtEquipo->setString(6, equipo.nombre);
         stmtEquipo->execute();
         delete stmtEquipo;
@@ -75,7 +79,7 @@ void EquipoDAO::alquilerEquipo(Equipo equipo) {
         sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
 
 
-        stmtEquipo->setBoolean(1, equipo.estado);
+        stmtEquipo->setBoolean(1, 1);
         stmtEquipo->setInt(2, equipo.cantSolicitudes);
         stmtEquipo->setString(3, equipo.nombre);
         stmtEquipo->execute();
@@ -134,7 +138,7 @@ Equipos EquipoDAO::listarEquipos() {
             nuevo.maxPh = res->getDouble("maxPh");
             nuevo.estado = res->getBoolean("estado");
             nuevo.cantSolicitudes = res->getInt("cantSolicitudes");
-            nuevo.categoria = res->getString("nombreCategoria");
+            nuevo.categoria.nombre = res->getString("nombreCategoria");
 
             //Agregando el nuevo equipo a la lista
             listaEquipos.Agregar(nuevo);
@@ -142,6 +146,86 @@ Equipos EquipoDAO::listarEquipos() {
         delete res;
         delete stmtEquipo;
         
+        return listaEquipos;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+    }
+    catch (std::runtime_error& e) {
+        std::cerr << "Runtime Error: " << e.what() << std::endl;
+    }
+}
+
+Equipos EquipoDAO::listarEquiposPorEstado(bool estado) {
+    try {
+
+        std::string queryEquipo = "SELECT nombreEquipo, annio, descripcion, minPh, maxPh, estado, cantSolicitudes,nombreCategoria FROM equipo INNER JOIN categoria ON equipo.idCategoria = categoria.idCategoria WHERE estado = ?; ";
+        sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
+        stmtEquipo->setBoolean(1, estado);
+        sql::ResultSet* res = stmtEquipo->executeQuery();
+
+        //Instanciando la lista donde se guardarán los equipos de la base de datos
+        Equipos listaEquipos;
+
+        while (res->next()) {
+
+            //Instanciando un equipo para asignarle los valores de las columnas
+            Equipo nuevo;
+            nuevo.nombre = res->getString("nombreEquipo");
+            nuevo.annio = res->getInt("annio");
+            nuevo.descripcion = res->getString("descripcion");
+            nuevo.minPh = res->getDouble("minPh");
+            nuevo.maxPh = res->getDouble("maxPh");
+            nuevo.estado = res->getBoolean("estado");
+            nuevo.cantSolicitudes = res->getInt("cantSolicitudes");
+            nuevo.categoria.nombre = res->getString("nombreCategoria");
+
+            //Agregando el nuevo equipo a la lista
+            listaEquipos.Agregar(nuevo);
+        }
+        delete res;
+        delete stmtEquipo;
+
+        return listaEquipos;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+    }
+    catch (std::runtime_error& e) {
+        std::cerr << "Runtime Error: " << e.what() << std::endl;
+    }
+}
+
+Equipos EquipoDAO::listarEquiposPorCategoria(std::string nombreCategoria) {
+    try {
+
+        std::string queryEquipo = "SELECT nombreEquipo, annio, descripcion, minPh, maxPh, estado, cantSolicitudes,nombreCategoria FROM equipo INNER JOIN categoria ON equipo.idCategoria = categoria.idCategoria WHERE nombreCategoria = ?; ";
+        sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
+        stmtEquipo->setString(1, nombreCategoria);
+        sql::ResultSet* res = stmtEquipo->executeQuery();
+
+        //Instanciando la lista donde se guardarán los equipos de la base de datos
+        Equipos listaEquipos;
+
+        while (res->next()) {
+
+            //Instanciando un equipo para asignarle los valores de las columnas
+            Equipo nuevo;
+            nuevo.nombre = res->getString("nombreEquipo");
+            nuevo.annio = res->getInt("annio");
+            nuevo.descripcion = res->getString("descripcion");
+            nuevo.minPh = res->getDouble("minPh");
+            nuevo.maxPh = res->getDouble("maxPh");
+            nuevo.estado = res->getBoolean("estado");
+            nuevo.cantSolicitudes = res->getInt("cantSolicitudes");
+            nuevo.categoria.nombre = res->getString("nombreCategoria");
+
+            //Agregando el nuevo equipo a la lista
+            listaEquipos.Agregar(nuevo);
+        }
+        delete res;
+        delete stmtEquipo;
+
         return listaEquipos;
     }
     catch (sql::SQLException& e) {
@@ -174,6 +258,63 @@ bool EquipoDAO::existeEquipo(std::string nombre) {
         }
 
         return existeEquipo;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+    }
+    catch (std::runtime_error& e) {
+        std::cerr << "Runtime Error: " << e.what() << std::endl;
+    }
+}
+
+bool EquipoDAO::equipoDisponible(std::string nombre) {
+    try {
+        bool equipoDisponible = true;
+        bool estado;
+
+        std::string queryEquipo = "SELECT estado FROM equipo WHERE nombreEquipo = ?;";
+        sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
+        stmtEquipo->setString(1, nombre);
+        sql::ResultSet* res = stmtEquipo->executeQuery();
+
+        while (res->next()) {
+            estado = res->getBoolean("estado");
+        }
+
+        delete res;
+        delete stmtEquipo;
+
+        if (estado) {
+            equipoDisponible = false;
+        }
+
+        return equipoDisponible;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+    }
+    catch (std::runtime_error& e) {
+        std::cerr << "Runtime Error: " << e.what() << std::endl;
+    }
+}
+
+int EquipoDAO::cantSolicitudes(std::string nombre) {
+    try {
+        int cantSolicitudes;
+
+        std::string queryEquipo = "SELECT cantSolicitudes FROM equipo WHERE nombreEquipo = ?;";
+        sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
+        stmtEquipo->setString(1, nombre);
+        sql::ResultSet* res = stmtEquipo->executeQuery();
+
+        while (res->next()) {
+            cantSolicitudes = res->getInt("cantSolicitudes");
+        }
+
+        delete res;
+        delete stmtEquipo;
+
+        return cantSolicitudes;
     }
     catch (sql::SQLException& e) {
         std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;

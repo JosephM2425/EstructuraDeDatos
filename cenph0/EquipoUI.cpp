@@ -1,9 +1,12 @@
 #include <iostream>
 #include <string>
 #include "GestorEquipos.h"
+#include "GestorCategorias.h"
 #include "EquipoUI.h"
 #include "Equipo.h"
 #include "Equipos.h"
+#include "Categoria.h"
+#include "Categorias.h"
 #include "AuxiliarUI.h"
 
 
@@ -11,12 +14,14 @@ void EquipoUI::imprimirMenuEquipos() {
 	cout << "[1] Registrar equipo" << endl;
 	cout << "[2] Modificar equipo" << endl;
 	cout << "[3] Eliminar equipo" << endl;
-	cout << "[4] Listar equipos" << endl;
-	cout << "[4] Listar equipos" << endl;
-	cout << "[4] Listar equipos por categoria" << endl;
-	cout << "[5] Alquilar equipo" << endl;
-	cout << "[5] Devolver equipo" << endl;
-	cout << "[5] Regresar" << endl;
+	cout << "[4] Listar equipos " << endl;
+	cout << "[5] Listar por hilera en el nombre" << endl;
+	cout << "[6] Listar equipos por categoria" << endl;
+	cout << "[7] Listar equipos por rango de pH" << endl;
+	cout << "[8] Listar equipos por rango de anios" << endl;
+	cout << "[9] Alquilar equipo" << endl;
+	cout << "[10] Devolver equipo" << endl;
+	cout << "[11] Regresar" << endl;
 	auxiliarUI.digiteOpcion();
 }
 
@@ -50,6 +55,34 @@ void EquipoUI::menuEquipos(int opcion) {
 	{
 	}
 	break;
+	case 6:
+	{
+		auxiliarUI.encabezado();
+		listarEquiposPorCategoria();
+	}
+	break;
+	case 7:
+	{
+	}
+	break;
+	case 8:
+	{
+	}
+	break;
+	case 9:
+	{
+		auxiliarUI.encabezado();
+		alquilarEquiipo();
+	}
+	break;
+	case 10:
+	{
+	}
+	break;
+	case 11:
+	{
+	}
+	break;
 	default:
 		cout << "Opcion invalida" << endl;
 	}
@@ -62,7 +95,7 @@ void EquipoUI::menuEquiposCompleto() {
 		imprimirMenuEquipos();
 		opcion = auxiliarUI.leerNumero();
 		menuEquipos(opcion);
-	} while (opcion != 5);
+	} while (opcion != 11);
 }
 
 string EquipoUI::leerNombreEquipo() {
@@ -85,23 +118,24 @@ Equipo EquipoUI::leerDatosEquipo() {
 	anio = auxiliarUI.leerNumero();
 	cout << "Digite la descripcion del equipo: ";
 	string descripcion;
-	cin >> descripcion;
+	getline(cin, descripcion);
 	cout << "Digite el pH maximo que puede medir el equipo: ";
 	double phMaximo;
 	phMaximo = auxiliarUI.leerpH();
 	cout << "Digite el pH minimo que puede medir el equipo: ";
 	double phMinimo;
 	phMinimo = auxiliarUI.leerpH();
-	cout << "Digite la categoria del equipo: ";
-	string categoria;
-	cin >> categoria;
+	Categorias categorias = gestorCategorias.listarCategorias();
+	categorias.Imprimir();
+	cout << "Digite el nombre de la categoria del equipo: ";
+	string categoria = leerOpcionCategoria();
 
 	Equipo equipo;
 	equipo.annio = anio;
 	equipo.descripcion = descripcion;
 	equipo.maxPh = phMaximo;
 	equipo.minPh = phMinimo;
-	equipo.categoria = categoria;
+	equipo.categoria.nombre = categoria;
 	equipo.estado = false;
 	equipo.cantSolicitudes = 0;
 
@@ -138,7 +172,7 @@ void EquipoUI::modificarEquipo() {
 			nombre = leerNombreEquipo();
 			existeEquipo = gestorEquipos.existeEquipo(nombre);
 			if (!existeEquipo) {
-				cout << "No existe un equipo con ese nombre. Por favor digite otro nombre." << endl;
+				cout << "No existe un equipo con ese nombre. Por favor digite otro nombre: ";
 			}
 		} while (!existeEquipo);
 		
@@ -155,6 +189,38 @@ void EquipoUI::modificarEquipo() {
 			cout << "El equipo se actualizo exitosamente." << endl;
 		}
 	} while (resultado != 0);
+}
+
+void EquipoUI::alquilarEquiipo() {
+	Equipo equipo;
+	string nombre;
+	int resultado;
+	bool equipoDisponible;
+	int cantSolicitudes;
+
+	listarEquiposPorEstado(0);
+
+	do {
+		nombre = leerNombreEquipo();
+		equipoDisponible = gestorEquipos.equipoDisponible(nombre);
+		if (!equipoDisponible) {
+			cout << "No hay un equipo disponible con ese nombre. Por favor digite otro nombre: ";
+		}
+	} while (!equipoDisponible);
+
+	cantSolicitudes = gestorEquipos.cantSolicitudes(nombre);
+
+	equipo.nombre = nombre;
+	equipo.cantSolicitudes = cantSolicitudes + 1;
+	resultado = gestorEquipos.alquilerEquipo(equipo);
+
+	if (resultado == 2) {
+		cout << "Ocurrio un error al alquilar el equipo. Por favor intentelo de nuevo." << endl;
+	}
+	else {
+		cout << "El equipo se alquilo exitosamente." << endl;
+	}
+
 }
 
 void EquipoUI::eliminarEquipo() {
@@ -219,8 +285,29 @@ int EquipoUI::leerOpcionOrden() {
 	}
 	else
 	{
-		cout << "Opcion invalida. Por favor digite una opcion valida." << endl;
+		cout << "Opcion invalida. Por favor digite una opcion valida: ";
 		return leerOpcionOrden();
+	}
+}
+
+string EquipoUI::leerOpcionCategoria() {
+	string opcionCategoria;
+	getline(cin, opcionCategoria);
+	if (opcionCategoria != "")
+	{
+		if (!gestorCategorias.existeCategoria(opcionCategoria)) {
+			cout << "La categoria no existe. Por favor digite una categoria valida: ";
+			return leerOpcionCategoria();
+		}	
+		else
+		{
+			return opcionCategoria;
+		}		
+	}
+	else
+	{
+		cout << "Digite el nombre de la categoria: ";
+		return leerOpcionCategoria();
 	}
 }
 
@@ -230,4 +317,17 @@ void EquipoUI::listarEquipos() {
 	int opcionOrden = leerOpcionOrden();
 	Equipos listaOrdenada = listaEquipos.ListarEquipos(opcionParam, opcionOrden);
 	listaOrdenada.Imprimir();
+}
+
+void EquipoUI::listarEquiposPorCategoria() {
+	Categorias categorias = gestorCategorias.listarCategorias();
+	categorias.Imprimir();
+	string opcionCategoria = leerOpcionCategoria();
+	Equipos listaFiltrada = gestorEquipos.listarEquiposPorCategoria(opcionCategoria);
+	listaFiltrada.Imprimir();
+}
+
+void EquipoUI::listarEquiposPorEstado(bool estado) {
+	Equipos listaFiltrada = gestorEquipos.listarEquiposPorEstado(estado);
+	listaFiltrada.Imprimir();
 }

@@ -18,6 +18,7 @@ public:
     int eliminarCategoria(std::string nombreCategoria);
     bool existeCategoria(std::string nombreCategoria);
     Categorias listarCategorias();
+    int obtenerIdCategoria(std::string nombreCategoria);
 };
 
 #endif

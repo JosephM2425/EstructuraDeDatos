@@ -5,6 +5,7 @@
 #include <regex>
 #include "Equipo.h"
 #include "Equipos.h"
+#include "Categoria.h"
 
 
 
@@ -17,7 +18,7 @@ Equipos::Equipos()
     final = nullptr;
 }
 
-int Equipos::AgregarAnnio(string nombre, int annio, string descripcion, string categoria, double maxPh, double minPh, bool estado, int cantSolicitudes) {
+int Equipos::AgregarAnnio(string nombre, int annio, string descripcion, Categoria categoria, double maxPh, double minPh, bool estado, int cantSolicitudes) {
     Equipo* nuevo = new Equipo();
     nuevo->nombre = nombre;
     nuevo->annio = annio;
@@ -319,7 +320,7 @@ Equipo Equipos::Consultar(string nombreEquipo) {
     }
 }
 
-int Equipos::Modificar(string nombre, int annio, string descripcion, string categoria, double maxPh, double minPh, bool estado, int cantSolicitudes) {
+int Equipos::Modificar(string nombre, int annio, string descripcion, Categoria categoria, double maxPh, double minPh, bool estado, int cantSolicitudes) {
     //Lista vacia
     if (inicio == nullptr) {
         return 0;
@@ -405,24 +406,32 @@ void Equipos::Imprimir()
     cout << "||                      Lista de Equipos | cen-ph0                      ||" << endl;
     cout << "==========================================================================" << endl;
 
-    do
+    if (inicio == nullptr)
     {
-        if (actual == final)
+		cout << "No hay equipos en la lista." << endl;
+		return;
+    }
+    else 
+    {
+        do
         {
-            recorridoCompleto = true;
-        }
+            if (actual == final)
+            {
+                recorridoCompleto = true;
+            }
 
-        cout << "Nombre: " << actual->nombre << "\n";
-        cout << "Anio: " << actual->annio << "\n";
-        cout << "Descripcion: " << actual->descripcion << "\n";
-        cout << "Categoria: " << actual->categoria << "\n";
-        cout << "Max pH: " << actual->maxPh << "\n";
-        cout << "Min pH: " << actual->minPh << "\n";
-        cout << "Estado: " << ((actual->estado == 1) ? "Alquilado." : "Disponible.") << "\n";
-        cout << "Cantidad de solicitudes: " << actual->cantSolicitudes << "\n";
-        cout << "==========================================================================\n";
-        actual = actual->siguiente;
-    } while (!recorridoCompleto && inicio != final);
+            cout << "Nombre: " << actual->nombre << "\n";
+            cout << "Anio: " << actual->annio << "\n";
+            cout << "Descripcion: " << actual->descripcion << "\n";
+            cout << "Categoria: " << actual->categoria.nombre << "\n";
+            cout << "Max pH: " << actual->maxPh << "\n";
+            cout << "Min pH: " << actual->minPh << "\n";
+            cout << "Estado: " << ((actual->estado == 1) ? "Alquilado." : "Disponible.") << "\n";
+            cout << "Cantidad de solicitudes: " << actual->cantSolicitudes << "\n";
+            cout << "==========================================================================\n";
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+	}
 }
 
 Equipos Equipos::CopiarLista() {

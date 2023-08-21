@@ -59,3 +59,7 @@ bool GestorCategorias::existeCategoria(std::string nombreCategoria) {
 Categorias GestorCategorias::listarCategorias() {
 	return categoriaDAO.listarCategorias();
 }
+
+int GestorCategorias::obtenerIdCategoria(std::string nombreCategoria) {
+	return categoriaDAO.obtenerIdCategoria(nombreCategoria);
+}
