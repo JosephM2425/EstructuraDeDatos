@@ -1,2 +1,4 @@
 C:\Users\chavesarayas\OneDrive - Microsoft\Documents\Steven\Cenfotec\Estructuras de datos\Practica\VisualStudioProjects\cenph0\x64\Release\cenph0.exe
 C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.exe
+C:\Users\josep\OneDrive\Documentos\cenfotec\EstructurasProyecto\EstructuraDeDatos\cenph0\x64\Release\cenph0.exe
+C:\Users\Aisunoken\Downloads\Cenfotec\5-2023 Cuatrimestre\Estructuras de Datos\EstructuraDeDatos\cenph0\x64\Release\cenph0.exe

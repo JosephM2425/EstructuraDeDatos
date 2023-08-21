@@ -7,12 +7,14 @@
 #include <string>
 #include "AuxiliarUI.h"
 #include "EquipoUI.h"
+#include "CategoriaUI.h"
 
 class GeneralUI
 {
 	private:
 		EquipoUI equipoUI;
 		AuxiliarUI auxiliarUI;
+		CategoriaUI categoriaUI;
 	public:
 		void imprimirMenuGeneral();
 		void menuGeneral(int opcion);

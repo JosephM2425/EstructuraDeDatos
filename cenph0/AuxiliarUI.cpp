@@ -9,6 +9,12 @@ void AuxiliarUI::encabezado() {
     cout << "||                Sistema de Gestion de Equipos | cen-ph0               ||" << endl;
     cout << "==========================================================================" << endl;
 }
+void AuxiliarUI::encabezadoC() {
+	cout << "==========================================================================" << endl;
+	cout << "||                Sistema de Gestion de Categorias | cen-ph0               ||" << endl;
+	cout << "==========================================================================" << endl;
+}
+
 
 void AuxiliarUI::digiteOpcion() {
     cout << "Digite la opcion que desea: ";
