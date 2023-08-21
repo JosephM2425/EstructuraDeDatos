@@ -19,25 +19,25 @@ void CategoriaUI::menuCategorias(int opcion) {
 	switch (opcion) {
 	case 1:
 	{
-		auxiliarUI.encabezado();
+		auxiliarUI.encabezadoC();
 		registrarCategoria();
 	}
 	break;
 	case 2:
 	{
-		auxiliarUI.encabezado();
+		auxiliarUI.encabezadoC();
 		modificarCategoria();
 	}
 	break;
 	case 3:
 	{
-		auxiliarUI.encabezado();
+		auxiliarUI.encabezadoC();
 		eliminarCategoria();
 	}
 	break;
 	case 4:
 	{
-		auxiliarUI.encabezado();
+		auxiliarUI.encabezadoC();
 		listarCategorias();
 	}
 	break;
@@ -53,7 +53,7 @@ void CategoriaUI::menuCategorias(int opcion) {
 void CategoriaUI::menuCategoriasCompleto() {
 	int opcion = 0;
 	do {
-		auxiliarUI.encabezado();
+		auxiliarUI.encabezadoC();
 		imprimirMenuCategorias();
 		opcion = auxiliarUI.leerNumero();
 		menuCategorias(opcion);

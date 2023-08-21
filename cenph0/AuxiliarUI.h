@@ -10,6 +10,7 @@ class AuxiliarUI
 {
 public:
 	void encabezado();
+	void encabezadoC();
 	void digiteOpcion();
 	int leerNumero();
 	bool esNumero(std::string cadena);
