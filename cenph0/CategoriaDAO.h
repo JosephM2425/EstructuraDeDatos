@@ -25,6 +25,7 @@ public:
     void eliminarCategoria(std::string nombreCategoria);
     Categorias listarCategorias();
     bool existeCategoria(std::string nombre);
+    int obtenerIdCategoria(std::string nombre);
 };
 
 #endif

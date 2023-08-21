@@ -55,9 +55,17 @@ bool AuxiliarUI::esNumero(string cadena) {
 double AuxiliarUI::leerpH() {
 	string cadena;
 	cin >> cadena;
-	if (esPhValido(cadena))
+	if (cadena != "")
 	{
-		return stod(cadena);
+		if (esPhValido(cadena))
+		{
+			return stod(cadena);
+		}
+		else
+		{
+			cout << "Digite un pH valido (entre 0.0 y 14.0): ";
+			return leerpH();
+		}
 	}
 	else
 	{

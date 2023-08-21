@@ -13,7 +13,7 @@ public:
     string nombre;
     int annio;
     string descripcion;
-    string categoria; //como prueba
+    Categoria categoria;
     double maxPh;
     double minPh;
     bool estado;

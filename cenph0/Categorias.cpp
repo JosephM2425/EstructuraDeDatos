@@ -12,7 +12,6 @@ int Categorias::Agregar(Categoria categoria)
 {
     Categoria* nuevo = new Categoria();
     nuevo->nombre = categoria.nombre;
-    nuevo->id = categoria.id;
     nuevo->anterior = nullptr;
     nuevo->siguiente = nullptr;
 
@@ -340,7 +339,6 @@ void Categorias::Imprimir()
         {
             recorridoCompleto = true;
         }
-
         cout << "Nombre: " << actual->nombre << "\n";
         cout << "==========================================================================\n";
         actual = actual->siguiente;

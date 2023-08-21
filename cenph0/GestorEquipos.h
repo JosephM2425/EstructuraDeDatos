@@ -20,7 +20,11 @@ public:
     int alquilerEquipo(Equipo equipo);
     int eliminarEquipo(std::string nombreEquipo);
     bool existeEquipo(std::string nombreEquipo);
+    bool equipoDisponible(std::string nombreEquipo);
+    int cantSolicitudes(std::string nombreEquipo);
     Equipos listarEquipos();
+    Equipos listarEquiposPorCategoria(std::string nombreCategoria);
+    Equipos listarEquiposPorEstado(bool estado);
 };
 
 #endif
