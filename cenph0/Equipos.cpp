@@ -595,6 +595,64 @@ Equipos Equipos::ListarEquipos(int param, int orden) {
     return equiposOrdenados;
 }
 
+Equipos Equipos::ListarEquiposBuscarHilera(std::string hilera) {
+    Equipos equiposBuscados; //Lista auxiliar
+    string hileraLC = hilera;
+    transform(hileraLC.begin(), hileraLC.end(), hileraLC.begin(), ::tolower);
+    regex regEx(hileraLC);
+
+    //Lista vacia
+    if (inicio == nullptr) {
+        return equiposBuscados;
+    }
+    //Lista con nodos
+    else {
+        //Recorro la lista para ver si existe el equipo
+        Equipo* actual = inicio;
+        bool recorridoCompleto = false;
+
+        do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            string descripcionActualLC = actual->descripcion;
+            transform(descripcionActualLC.begin(), descripcionActualLC.end(), descripcionActualLC.begin(), ::tolower);
+
+            //Si la descripción del equipo nuevo se encuentra en la descripción del equipo actual
+            if (regex_search(descripcionActualLC, regEx)) {
+                Equipo* nuevo = new Equipo();
+                nuevo->nombre = actual->nombre;
+                nuevo->annio = actual->annio;
+                nuevo->descripcion = actual->descripcion;
+                nuevo->categoria = actual->categoria;
+                nuevo->maxPh = actual->maxPh;
+                nuevo->minPh = actual->minPh;
+                nuevo->estado = actual->estado;
+                nuevo->cantSolicitudes = actual->cantSolicitudes;
+                nuevo->anterior = nullptr;
+                nuevo->siguiente = nullptr;
+
+                //Si la lista está vacía
+                if (equiposBuscados.inicio == nullptr) {
+                    equiposBuscados.inicio = nuevo;
+                    equiposBuscados.final = nuevo;
+                }
+                else //Si ya tiene algún nodo
+                {
+                    nuevo->anterior = equiposBuscados.final;
+                    nuevo->siguiente = equiposBuscados.inicio;
+                    equiposBuscados.final->siguiente = nuevo;
+                    equiposBuscados.final = nuevo;
+                    equiposBuscados.inicio->anterior = equiposBuscados.final;
+                }
+            }
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+        return equiposBuscados;
+    }
+}
+
 Equipos Equipos::ListarEquiposBuscarNombre(std::string hilera) {
     Equipos equiposBuscados; //Lista auxiliar
     string hileraLC = hilera;

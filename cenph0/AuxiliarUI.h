@@ -15,6 +15,7 @@ public:
 	int leerNumero();
 	bool esNumero(std::string cadena);
 	double leerpH();
+	int leerAnio();
 	bool esPhValido(std::string cadena);
 };
 

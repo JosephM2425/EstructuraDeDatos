@@ -32,6 +32,23 @@ int AuxiliarUI::leerNumero() {
 	return stoi(cadena);
 }
 
+//para leer el anio y que este entre 1985 y 2023
+int AuxiliarUI::leerAnio() {
+	int numeroIngresado = leerNumero();
+
+	if( numeroIngresado > 1985 && numeroIngresado < 2023)
+	{
+		return numeroIngresado;
+		
+	}
+	else
+	{
+		cout << "Digite un anio valido (entre 1985 y 2023): ";
+		return leerNumero();
+	}
+	
+}
+
 bool AuxiliarUI::esNumero(string cadena) {
 	if (cadena.size() == 0)
 	{
@@ -51,6 +68,8 @@ bool AuxiliarUI::esNumero(string cadena) {
 
 	return true;
 }
+
+
 
 double AuxiliarUI::leerpH() {
 	string cadena;

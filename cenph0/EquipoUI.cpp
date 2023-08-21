@@ -56,11 +56,13 @@ void EquipoUI::menuEquipos(int opcion)
 	case 5:
 	{
 		auxiliarUI.encabezado();
+		listarEquiposPorHilera();
 	}
 	break;
 	case 6:
 	{
 		auxiliarUI.encabezado();
+		listarEquiposPorCategoria();
 	}
 	break;
 	case 7:
@@ -72,34 +74,7 @@ void EquipoUI::menuEquipos(int opcion)
 	case 8:
 	{
 		auxiliarUI.encabezado();
-	}
-	break;
-	case 9:
-	{
-		auxiliarUI.encabezado();
-	}
-	break;
-	case 10:
-	{
-		auxiliarUI.encabezado();
-	}
-	break;
-	case 11:
-	{
-	}
-	break;
-	case 6:
-	{
-		auxiliarUI.encabezado();
-		listarEquiposPorCategoria();
-	}
-	break;
-	case 7:
-	{
-	}
-	break;
-	case 8:
-	{
+		listarEquiposPorAnio();
 	}
 	break;
 	case 9:
@@ -110,10 +85,13 @@ void EquipoUI::menuEquipos(int opcion)
 	break;
 	case 10:
 	{
+		auxiliarUI.encabezado();
 	}
 	break;
 	case 11:
 	{
+		auxiliarUI.menuGeneralCompleto();
+
 	}
 	break;
 	default:
@@ -145,6 +123,21 @@ string EquipoUI::leerNombreEquipo()
 	{
 		cout << "Digite el nombre del equipo: ";
 		return leerNombreEquipo();
+	}
+}
+
+string EquipoUI::leerHileraCaracteres()
+{
+	string hileraC;
+	getline(cin, hileraC);
+	if (hileraC != "")
+	{
+		return hileraC;
+	}
+	else
+	{
+		cout << "Digite la hilera de caracteres a buscar: ";
+		return leerHileraCaracteres();
 	}
 }
 
@@ -426,4 +419,39 @@ double EquipoUI::leerpHMax()
 	pHMaximo = auxiliarUI.leerpH();
 
 	return pHMaximo;
+}
+
+void EquipoUI::listarEquiposPorAnio()
+{
+	Equipos listaEquipos = gestorEquipos.listarEquipos();
+	int anioInicial = leerAnioInicial();
+	int anioFinal = leerAnioFinal();
+	Equipos listaOrdenadaAnnio = listaEquipos.ListarEquiposRangoAnnios(anioInicial, anioFinal);
+	listaOrdenadaAnnio.Imprimir();
+}
+
+int EquipoUI::leerAnioInicial()
+{
+
+	cout << "Digite el anio inicial del rango a buscar: ";
+	int anioInicial= 0;
+	anioInicial = auxiliarUI.leerNumero();
+	return anioInicial;
+}
+
+int EquipoUI::leerAnioFinal()
+{
+	cout << "Digite el anio final del rango a buscar: ";
+	int anioFinal = 0;
+	anioFinal = auxiliarUI.leerNumero();
+	return anioFinal;
+}
+
+
+void EquipoUI::listarEquiposPorHilera() {
+
+	Equipos listaEquipos = gestorEquipos.listarEquipos();
+	string hileraC = leerHileraCaracteres();
+	Equipos listaOrdenadaHilera = listaEquipos.ListarEquiposBuscarHilera(hileraC);
+	listaOrdenadaHilera.Imprimir();
 }

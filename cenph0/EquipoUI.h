@@ -37,9 +37,14 @@ public:
 	void listarEquipos();
 	void listarEquiposPorCategoria();
 	void listarEquiposPorEstado(bool estado);
+	void listarEquiposPorAnio();
+	void listarEquiposPorHilera();
+	int leerAnioInicial();
+	int leerAnioFinal();
 	void listarEquipospH();
 	double leerpHMin();
 	double leerpHMax();
+	std::string leerHileraCaracteres();
 };
 
 #endif
