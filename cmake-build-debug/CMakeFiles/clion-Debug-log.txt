@@ -1,1 +1,0 @@
-CMakeLists.txt not found in C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos Select CMakeLists.txt
