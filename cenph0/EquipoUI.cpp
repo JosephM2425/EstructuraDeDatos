@@ -56,6 +56,7 @@ void EquipoUI::menuEquipos(int opcion)
 	case 5:
 	{
 		auxiliarUI.encabezado();
+		listarEquiposPorHilera();
 	}
 	break;
 	case 6:
@@ -73,12 +74,13 @@ void EquipoUI::menuEquipos(int opcion)
 	case 8:
 	{
 		auxiliarUI.encabezado();
+		listarEquiposPorAnio();
 	}
 	break;
 	case 9:
 	{
 		auxiliarUI.encabezado();
-		alquilarEquipo();
+		alquilarEquiipo();
 	}
 	break;
 	case 10:
@@ -89,6 +91,7 @@ void EquipoUI::menuEquipos(int opcion)
 	break;
 	case 11:
 	{
+		auxiliarUI.menuGeneralCompleto();
 	}
 	break;
 	default:
@@ -120,6 +123,21 @@ string EquipoUI::leerNombreEquipo()
 	{
 		cout << "Digite el nombre del equipo: ";
 		return leerNombreEquipo();
+	}
+}
+
+string EquipoUI::leerHileraCaracteres()
+{
+	string hileraC;
+	getline(cin, hileraC);
+	if (hileraC != "")
+	{
+		return hileraC;
+	}
+	else
+	{
+		cout << "Digite la hilera de caracteres a buscar: ";
+		return leerHileraCaracteres();
 	}
 }
 
@@ -225,7 +243,7 @@ void EquipoUI::alquilarEquipo()
 	bool existeEquipo;
 
 	listarEquiposPorEstado(false);
-	
+
 	do
 	{
 		nombre = leerNombreEquipo();
@@ -237,21 +255,21 @@ void EquipoUI::alquilarEquipo()
 		}
 	} while (!equipoDisponible || !existeEquipo);
 
-		cantSolicitudes = gestorEquipos.cantSolicitudes(nombre);
+	cantSolicitudes = gestorEquipos.cantSolicitudes(nombre);
 
-		equipo.nombre = nombre;
-		equipo.estado = true;
-		equipo.cantSolicitudes = cantSolicitudes + 1;
-		resultado = gestorEquipos.alquilerEquipo(equipo);
+	equipo.nombre = nombre;
+	equipo.estado = true;
+	equipo.cantSolicitudes = cantSolicitudes + 1;
+	resultado = gestorEquipos.alquilerEquipo(equipo);
 
-		if (resultado == 2)
-		{
-			cout << "Ocurrio un error al alquilar el equipo. Por favor intentelo de nuevo." << endl;
-		}
-		else
-		{
-			cout << "El equipo se alquilo exitosamente." << endl;
-		}
+	if (resultado == 2)
+	{
+		cout << "Ocurrio un error al alquilar el equipo. Por favor intentelo de nuevo." << endl;
+	}
+	else
+	{
+		cout << "El equipo se alquilo exitosamente." << endl;
+	}
 }
 
 void EquipoUI::devolverEquipo()
@@ -264,7 +282,6 @@ void EquipoUI::devolverEquipo()
 	int cantSolicitudes;
 
 	listarEquiposPorEstado(true);
-	
 
 	do
 	{
@@ -277,20 +294,20 @@ void EquipoUI::devolverEquipo()
 		}
 	} while (equipoDisponible || !existeEquipo);
 
-		cantSolicitudes = gestorEquipos.cantSolicitudes(nombre);
-		equipo.nombre = nombre;
-		equipo.cantSolicitudes = cantSolicitudes;
-		equipo.estado = false;
-		resultado = gestorEquipos.alquilerEquipo(equipo);
+	cantSolicitudes = gestorEquipos.cantSolicitudes(nombre);
+	equipo.nombre = nombre;
+	equipo.cantSolicitudes = cantSolicitudes;
+	equipo.estado = false;
+	resultado = gestorEquipos.alquilerEquipo(equipo);
 
-		if (resultado == 2)
-		{
-			cout << "Ocurrio un error al devolver el equipo. Por favor intentelo de nuevo." << endl;
-		}
-		else
-		{
-			cout << "El equipo se devolvio exitosamente." << endl;
-		}
+	if (resultado == 2)
+	{
+		cout << "Ocurrio un error al devolver el equipo. Por favor intentelo de nuevo." << endl;
+	}
+	else
+	{
+		cout << "El equipo se devolvio exitosamente." << endl;
+	}
 }
 
 void EquipoUI::eliminarEquipo()
@@ -443,4 +460,39 @@ double EquipoUI::leerpHMax()
 	pHMaximo = auxiliarUI.leerpH();
 
 	return pHMaximo;
+}
+
+void EquipoUI::listarEquiposPorAnio()
+{
+	Equipos listaEquipos = gestorEquipos.listarEquipos();
+	int anioInicial = leerAnioInicial();
+	int anioFinal = leerAnioFinal();
+	Equipos listaOrdenadaAnnio = listaEquipos.ListarEquiposRangoAnnios(anioInicial, anioFinal);
+	listaOrdenadaAnnio.Imprimir();
+}
+
+int EquipoUI::leerAnioInicial()
+{
+
+	cout << "Digite el anio inicial del rango a buscar: ";
+	int anioInicial = 0;
+	anioInicial = auxiliarUI.leerNumero();
+	return anioInicial;
+}
+
+int EquipoUI::leerAnioFinal()
+{
+	cout << "Digite el anio final del rango a buscar: ";
+	int anioFinal = 0;
+	anioFinal = auxiliarUI.leerNumero();
+	return anioFinal;
+}
+
+void EquipoUI::listarEquiposPorHilera()
+{
+
+	Equipos listaEquipos = gestorEquipos.listarEquipos();
+	string hileraC = leerHileraCaracteres();
+	Equipos listaOrdenadaHilera = listaEquipos.ListarEquiposBuscarHilera(hileraC);
+	listaOrdenadaHilera.Imprimir();
 }

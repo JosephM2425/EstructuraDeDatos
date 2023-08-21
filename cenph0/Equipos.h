@@ -26,6 +26,7 @@ public:
     int Cantidad();
     void Imprimir();
     Equipos ListarEquipos(int param, int orden);
+    Equipos ListarEquiposBuscarHilera(std::string hilera);
     Equipos ListarEquiposBuscarNombre(string hilera);
     Equipos ListarEquiposRangopH(double pHMinp, double pHMaxp);
     Equipos ListarEquiposRangoAnnios(int annioInicial, int annioFinal);
