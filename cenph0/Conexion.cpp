@@ -9,9 +9,9 @@
 
 
 Conexion::Conexion() {
-    host = "tcp://127.0.0.1:3306";
-    user = "root";
-    password = "1234";
+    host = "tcp://cenph0.mysql.database.azure.com:3306";
+    user = "francisco";
+    password = "stevenChaves123.";
     schema = "cenph0db";
     driver = sql::mysql::get_mysql_driver_instance();
     con = driver->connect(host, user, password);

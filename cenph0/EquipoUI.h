@@ -29,6 +29,9 @@ class EquipoUI
 		int leerOpcionParam();
 		int leerOpcionOrden();
 		void listarEquipos();
+		void listarEquipospH();
+		double leerpHMin();
+		double leerpHMax();
 };
 
 #endif

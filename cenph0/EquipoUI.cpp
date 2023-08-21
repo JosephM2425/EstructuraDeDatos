@@ -11,12 +11,14 @@ void EquipoUI::imprimirMenuEquipos() {
 	cout << "[1] Registrar equipo" << endl;
 	cout << "[2] Modificar equipo" << endl;
 	cout << "[3] Eliminar equipo" << endl;
-	cout << "[4] Listar equipos" << endl;
-	cout << "[4] Listar equipos" << endl;
-	cout << "[4] Listar equipos por categoria" << endl;
-	cout << "[5] Alquilar equipo" << endl;
-	cout << "[5] Devolver equipo" << endl;
-	cout << "[5] Regresar" << endl;
+	cout << "[4] Listar equipos " << endl;
+	cout << "[5] Listar por hilera" << endl;
+	cout << "[6] Listar equipos por categoria" << endl;
+	cout << "[7] Listar equipos por rango de pH" << endl;
+	cout << "[8] Listar equipos por rango de anios" << endl;
+	cout << "[9] Alquilar equipo" << endl;
+	cout << "[10] Devolver equipo" << endl;
+	cout << "[11] Regresar" << endl;
 	auxiliarUI.digiteOpcion();
 }
 
@@ -48,6 +50,42 @@ void EquipoUI::menuEquipos(int opcion) {
 	break;
 	case 5:
 	{
+		auxiliarUI.encabezado();
+
+	}
+	break;
+	case 6:
+	{
+		auxiliarUI.encabezado();
+
+	}
+	break;
+	case 7:
+	{
+		auxiliarUI.encabezado();
+		listarEquipospH();
+
+	}
+	break;
+	case 8:
+	{
+		auxiliarUI.encabezado();
+	}
+	break;
+	case 9:
+	{
+		auxiliarUI.encabezado();
+	}
+	break;
+	case 10:
+	{
+		auxiliarUI.encabezado();
+
+	}
+	break;
+	case 11:
+	{
+
 	}
 	break;
 	default:
@@ -230,4 +268,32 @@ void EquipoUI::listarEquipos() {
 	int opcionOrden = leerOpcionOrden();
 	Equipos listaOrdenada = listaEquipos.ListarEquipos(opcionParam, opcionOrden);
 	listaOrdenada.Imprimir();
+}
+
+
+
+void EquipoUI::listarEquipospH() {
+	Equipos listaEquipos = gestorEquipos.listarEquipos();
+	double phMinimo = leerpHMin();
+	double pHMaximo = leerpHMax();
+	Equipos listaOrdenadapH = listaEquipos.ListarEquiposRangopH(phMinimo, pHMaximo);
+	listaOrdenadapH.Imprimir();
+}
+
+double EquipoUI::leerpHMin() {
+	
+	cout << "Digite el valor minimo de pH del rango a buscar: ";
+	double phMinimo = 0.0;
+	phMinimo = auxiliarUI.leerpH();
+
+	return phMinimo;
+}
+
+double EquipoUI::leerpHMax() {
+
+	cout << "Digite el valor maximo de pH del rango a buscar: ";
+	double pHMaximo = 0.0;
+	pHMaximo = auxiliarUI.leerpH();
+
+	return pHMaximo;
 }

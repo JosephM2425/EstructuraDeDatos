@@ -75,3 +75,4 @@ bool GestorEquipos::existeEquipo(std::string nombreEquipo) {
 Equipos GestorEquipos::listarEquipos() {
 	return equipoDAO.listarEquipos();
 }
+

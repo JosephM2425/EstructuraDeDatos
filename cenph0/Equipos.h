@@ -28,6 +28,7 @@ public:
     Equipos CopiarLista();
     Equipos ListarEquipos(int param, int orden);
     Equipos ListarEquiposBuscarNombre(string hilera);
+    Equipos ListarEquiposRangopH(double pHMinp, double pHMaxp);
     Equipos ListarEquiposRangoAnnios(int annioInicial, int annioFinal);
     Equipos ListarEquiposCantSolicitudes(int cantSolicitudes);
     Equipos EliminarEquiposCantSolicitudes(int cantSolicitudes);
