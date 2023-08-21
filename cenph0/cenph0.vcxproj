@@ -130,7 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>STATIC_CONCPP;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);STATIC_CONCPP</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\caria\Documents\Libraries\mysql-connector-c++\include\jdbc;C:\DriversJavaFX.JDBC\mysql8.1.0-64\include\jdbc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\MySQL\mysql-connector-c++-8.1.0-winx64\include\jdbc;C:\Users\caria\Documents\Libraries\mysql-connector-c++\include\jdbc;C:\DriversJavaFX.JDBC\mysql8.1.0-64\include\jdbc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -140,7 +140,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\caria\Documents\Libraries\mysql-connector-c++\lib64\vs14;C:\DriversJavaFX.JDBC\mysql8.1.0-64\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\mysql-connector-c++-8.1.0-winx64\lib64\vs14;C:\Users\caria\Documents\Libraries\mysql-connector-c++\lib64\vs14;C:\DriversJavaFX.JDBC\mysql8.1.0-64\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>mysqlcppconn-static.lib;%(AdditionalDependencies);mysqlcppconn-static.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

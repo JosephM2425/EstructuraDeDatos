@@ -704,6 +704,57 @@ Equipos Equipos::ListarEquiposRangoAnnios(int annioInicial, int annioFinal) {
     }
 }
 
+Equipos Equipos::ListarEquiposRangopH(double pHMinp, double pHMaxp) {
+    Equipos equiposBuscados; //Lista auxiliar
+
+    //Lista vacia
+    if (inicio == nullptr) {
+        return equiposBuscados;
+    }
+    //Lista con nodos
+    else {
+        //Recorro la lista para ver si existe el equipo
+        Equipo* actual = inicio;
+        bool recorridoCompleto = false;
+
+        do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            if (actual->minPh >= pHMinp && actual->maxPh <= pHMaxp) {
+                Equipo* nuevo = new Equipo();
+                nuevo->nombre = actual->nombre;
+                nuevo->annio = actual->annio;
+                nuevo->descripcion = actual->descripcion;
+                nuevo->categoria = actual->categoria;
+                nuevo->maxPh = actual->maxPh;
+                nuevo->minPh = actual->minPh;
+                nuevo->estado = actual->estado;
+                nuevo->cantSolicitudes = actual->cantSolicitudes;
+                nuevo->anterior = nullptr;
+                nuevo->siguiente = nullptr;
+
+                //Si la lista está vacía
+                if (equiposBuscados.inicio == nullptr) {
+                    equiposBuscados.inicio = nuevo;
+                    equiposBuscados.final = nuevo;
+                }
+                else //Si ya tiene algún nodo
+                {
+                    nuevo->anterior = equiposBuscados.final;
+                    nuevo->siguiente = equiposBuscados.inicio;
+                    equiposBuscados.final->siguiente = nuevo;
+                    equiposBuscados.final = nuevo;
+                    equiposBuscados.inicio->anterior = equiposBuscados.final;
+                }
+            }
+            actual = actual->siguiente;
+        } while (!recorridoCompleto && inicio != final);
+        return equiposBuscados;
+    }
+}
+
 Equipos Equipos::ListarEquiposCantSolicitudes(int cantSolicitudes) {
     Equipos equiposBuscados; //Lista auxiliar
 
