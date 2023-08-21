@@ -67,6 +67,29 @@ void EquipoDAO::actualizarEquipo(Equipo equipo) {
     }
 }
 
+void EquipoDAO::alquilerEquipo(Equipo equipo) {
+    try
+    {
+        std::string queryEquipo = "UPDATE equipo SET estado=?, cantSolicitudes=? WHERE nombreEquipo=? ";
+
+        sql::PreparedStatement* stmtEquipo = con->prepareStatement(queryEquipo);
+
+
+        stmtEquipo->setBoolean(1, equipo.estado);
+        stmtEquipo->setInt(2, equipo.cantSolicitudes);
+        stmtEquipo->setString(3, equipo.nombre);
+        stmtEquipo->execute();
+        delete stmtEquipo;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "SQL Exception: " << e.what() << " (MySQL error code: " << e.getErrorCode() << ")" << std::endl;
+    }
+    catch (std::runtime_error& e) {
+        std::cerr << "Runtime Error: " << e.what() << std::endl;
+
+    }
+}
+
 void EquipoDAO::eliminarEquipo(std::string nombreEquipo) {
     try
     {

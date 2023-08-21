@@ -89,11 +89,12 @@ Categorias CategoriaDAO::listarCategorias(){
 		Categorias listaCategorias;
 
 		while(res->next()){
-			std::string nombre;
-			nombre = res->getString("nombreCategoria");
+			Categoria categoria;
+			categoria.id = res->getInt("idCategoria");
+			categoria.nombre = res->getString("nombreCategoria");
 			
 			//Agregando la nueva categoria a la lista
-			listaCategorias.Agregar(nombre);
+			listaCategorias.Agregar(categoria);
 		}
 		delete stmtCategoria;
 		delete res;

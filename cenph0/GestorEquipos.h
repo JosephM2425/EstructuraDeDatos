@@ -17,6 +17,7 @@ private:
 public:
     int insertarEquipo(Equipo equipo);
     int actualizarEquipo(Equipo equipo);
+    int alquilerEquipo(Equipo equipo);
     int eliminarEquipo(std::string nombreEquipo);
     bool existeEquipo(std::string nombreEquipo);
     Equipos listarEquipos();

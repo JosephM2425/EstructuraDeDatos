@@ -73,6 +73,7 @@ string CategoriaUI::leerNombreCategoria() {
 		return leerNombreCategoria();
 	}
 }
+
 void CategoriaUI::registrarCategoria() {
 	Categoria categoria;
 	int resultado;

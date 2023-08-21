@@ -418,7 +418,7 @@ void Equipos::Imprimir()
         cout << "Categoria: " << actual->categoria << "\n";
         cout << "Max pH: " << actual->maxPh << "\n";
         cout << "Min pH: " << actual->minPh << "\n";
-        cout << "Estado: " << actual->estado << "\n";
+        cout << "Estado: " << ((actual->estado == 1) ? "Alquilado." : "Disponible.") << "\n";
         cout << "Cantidad de solicitudes: " << actual->cantSolicitudes << "\n";
         cout << "==========================================================================\n";
         actual = actual->siguiente;

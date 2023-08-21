@@ -9,6 +9,7 @@ class Categoria
 {
 public:
     Categoria* anterior;
+    int id;
     string nombre;
     Categoria* siguiente;
 };

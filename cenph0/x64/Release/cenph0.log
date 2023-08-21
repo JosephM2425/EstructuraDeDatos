@@ -1,11 +1,21 @@
-﻿  AuxiliarUI.cpp
+﻿  CategoriaDAO.cpp
   CategoriaUI.cpp
+  Categorias.cpp
+  Conexion.cpp
+  EquipoDAO.cpp
   EquipoUI.cpp
+  Equipos.cpp
   GeneralUI.cpp
+  GestorCategorias.cpp
+  GestorEquipos.cpp
   cenph0.cpp
   Generando código...
+C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\EquipoDAO.cpp(184): warning C4715: 'EquipoDAO::existeEquipo': no todas las rutas de acceso de control devuelven un valor
+C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\EquipoDAO.cpp(153): warning C4715: 'EquipoDAO::listarEquipos': no todas las rutas de acceso de control devuelven un valor
+C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\CategoriaDAO.cpp(111): warning C4715: 'CategoriaDAO::listarCategorias': no todas las rutas de acceso de control devuelven un valor
+C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\CategoriaDAO.cpp(142): warning C4715: 'CategoriaDAO::existeCategoria': no todas las rutas de acceso de control devuelven un valor
 AuxiliarUI.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/OPT:ICF'
-     Creando biblioteca C:\Users\Aisunoken\Downloads\Cenfotec\5-2023 Cuatrimestre\Estructuras de Datos\EstructuraDeDatos\cenph0\x64\Release\cenph0.lib y objeto C:\Users\Aisunoken\Downloads\Cenfotec\5-2023 Cuatrimestre\Estructuras de Datos\EstructuraDeDatos\cenph0\x64\Release\cenph0.exp
+     Creando biblioteca C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.lib y objeto C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.exp
   LINK : se especificó /LTCG pero no se requiere generación de código; quite /LTCG de la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 mysqlcppconn-static.lib(mysql_driver.obj) : warning LNK4099: no se encontró PDB '' con 'mysqlcppconn-static.lib(mysql_driver.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
 mysqlcppconn-static.lib(mysql_connection.obj) : warning LNK4099: no se encontró PDB '' con 'mysqlcppconn-static.lib(mysql_connection.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
@@ -29,4 +39,4 @@ mysqlcppconn-static.lib(mysql_native_resultset_wrapper.obj) : warning LNK4099: n
 mysqlcppconn-static.lib(mysql_native_statement_wrapper.obj) : warning LNK4099: no se encontró PDB '' con 'mysqlcppconn-static.lib(mysql_native_statement_wrapper.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
 mysqlcppconn-static.lib(mysql_art_rset_metadata.obj) : warning LNK4099: no se encontró PDB '' con 'mysqlcppconn-static.lib(mysql_art_rset_metadata.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
 mysqlcppconn-static.lib(mysql_resultset_metadata.obj) : warning LNK4099: no se encontró PDB '' con 'mysqlcppconn-static.lib(mysql_resultset_metadata.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
-  cenph0.vcxproj -> C:\Users\Aisunoken\Downloads\Cenfotec\5-2023 Cuatrimestre\Estructuras de Datos\EstructuraDeDatos\cenph0\x64\Release\cenph0.exe
+  cenph0.vcxproj -> C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.exe
