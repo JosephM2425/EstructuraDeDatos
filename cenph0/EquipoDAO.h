@@ -22,6 +22,7 @@ public:
     EquipoDAO();
     void insertarEquipo(Equipo equipo);
     void actualizarEquipo(Equipo equipo);
+    void alquilerEquipo(Equipo equipo);
     void eliminarEquipo(std::string nombreEquipo);
     Equipos listarEquipos();
     bool existeEquipo(std::string nombre);

@@ -12,6 +12,10 @@ void EquipoUI::imprimirMenuEquipos() {
 	cout << "[2] Modificar equipo" << endl;
 	cout << "[3] Eliminar equipo" << endl;
 	cout << "[4] Listar equipos" << endl;
+	cout << "[4] Listar equipos" << endl;
+	cout << "[4] Listar equipos por categoria" << endl;
+	cout << "[5] Alquilar equipo" << endl;
+	cout << "[5] Devolver equipo" << endl;
 	cout << "[5] Regresar" << endl;
 	auxiliarUI.digiteOpcion();
 }
@@ -62,10 +66,17 @@ void EquipoUI::menuEquiposCompleto() {
 }
 
 string EquipoUI::leerNombreEquipo() {
-	cout << "Digite el nombre del equipo: ";
 	string nombre;
 	getline(cin, nombre);
-	return nombre;
+	if (nombre != "")
+	{
+		return nombre;
+	}
+	else
+	{
+		cout << "Digite el nombre del equipo: ";
+		return leerNombreEquipo();
+	}
 }
 
 Equipo EquipoUI::leerDatosEquipo() {
@@ -175,37 +186,42 @@ void EquipoUI::eliminarEquipo() {
 
 int EquipoUI::leerOpcionParam() {
 	int opcionParam = 0;
-	do {
-		cout << "Digite el parametro por el cual desea ordenar la lista: " << endl;
-		cout << "[1] Nombre" << endl;
-		cout << "[2] Anio" << endl;
-		opcionParam = auxiliarUI.leerNumero();
 
-		if (opcionParam != 1 && opcionParam != 2) {
-			cout << "Opcion invalida. Por favor digite una opcion valida." << endl;
-		}
-	} while (opcionParam != 1 && opcionParam != 2);
-
-	return opcionParam;
+	cout << "[1] Nombre" << endl;
+	cout << "[2] Anio" << endl;
+	cout << "Digite el parametro por el cual desea ordenar la lista: ";
+	opcionParam = auxiliarUI.leerNumero();
+	if (opcionParam == 1 || opcionParam == 2)
+	{
+		return opcionParam;
+	}
+	else
+	{
+		cout << "Opcion invalida. Por favor digite una opcion valida." << endl;
+		return leerOpcionParam();
+	}
 }
 
 int EquipoUI::leerOpcionOrden() {
 	int opcionOrden = 0;
-	do {
-		cout << "Digite el orden en el que desea ordenar la lista: " << endl;
-		cout << "[1] Ascendente" << endl;
-		cout << "[2] Descendente" << endl;
-		opcionOrden = auxiliarUI.leerNumero();
-
-		if (opcionOrden != 1 && opcionOrden != 2) {
-			cout << "Opcion invalida. Por favor digite una opcion valida." << endl;
+	
+	cout << "[1] Ascendente" << endl;
+	cout << "[2] Descendente" << endl;
+	cout << "Digite el orden en el que desea ordenar la lista: " << endl;
+	opcionOrden = auxiliarUI.leerNumero();
+	if (opcionOrden == 1 || opcionOrden == 2)
+	{
+		if (opcionOrden == 2) {
+			opcionOrden = -1;
 		}
-	} while (opcionOrden != 1 && opcionOrden != 2);
 
-	if (opcionOrden == 2) {
-		opcionOrden = -1;
+		return opcionOrden;
 	}
-	 return opcionOrden;
+	else
+	{
+		cout << "Opcion invalida. Por favor digite una opcion valida." << endl;
+		return leerOpcionOrden();
+	}
 }
 
 void EquipoUI::listarEquipos() {

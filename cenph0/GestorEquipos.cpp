@@ -52,6 +52,22 @@ int GestorEquipos::actualizarEquipo(Equipo equipo) {
 	}
 }
 
+int GestorEquipos::alquilerEquipo(Equipo equipo) {
+	try {
+		if (!existeEquipo(equipo.nombre)) {
+			return 1;
+		}
+		else {
+			equipoDAO.alquilerEquipo(equipo);
+			return 0;
+		}
+	}
+	catch (exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+		return 2;
+	}
+}
+
 bool GestorEquipos::existeEquipo(std::string nombreEquipo) {
 	return equipoDAO.existeEquipo(nombreEquipo);
 }

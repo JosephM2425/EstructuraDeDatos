@@ -8,10 +8,11 @@ Categorias::Categorias()
     final = nullptr;
 }
 
-int Categorias::Agregar(string nombre)
+int Categorias::Agregar(Categoria categoria)
 {
     Categoria* nuevo = new Categoria();
-    nuevo->nombre = nombre;
+    nuevo->nombre = categoria.nombre;
+    nuevo->id = categoria.id;
     nuevo->anterior = nullptr;
     nuevo->siguiente = nullptr;
 
@@ -143,6 +144,58 @@ int Categorias::Retirar(string nombre)
         return 0;
     }
 
+}
+
+Categoria Categorias::Consultar(string nombreCategoria) {
+    Categoria categoria;
+    //Lista vacia
+    if (inicio == nullptr) {
+        return categoria;
+    }
+        //Lista con nodos
+    else {
+        //Recorro la lista para ver si existe la categoria
+        Categoria *actual = inicio;
+        string nombreABuscarStr = nombreCategoria;
+        transform(nombreABuscarStr.begin(), nombreABuscarStr.end(), nombreABuscarStr.begin(), ::tolower);
+        const char *nombreABuscar = nombreABuscarStr.data();
+        bool recorridoCompleto = false;
+
+        do {
+            if (actual == final) {
+                recorridoCompleto = true;
+            }
+
+            string nombreActualStr = actual->nombre;
+            transform(nombreActualStr.begin(), nombreActualStr.end(), nombreActualStr.begin(), ::tolower);
+            const char *nombreActual = nombreActualStr.data();
+
+            //Si el nombre del categoria nuevo es igual al nombre del categoria actual
+            if (strcmp(nombreABuscar, nombreActual) == 0) {
+                categoria.nombre = actual->nombre;
+                categoria.anterior = actual->anterior;
+                categoria.siguiente = actual->siguiente;
+                return categoria;
+            } else {
+                if (actual->siguiente == nullptr) {
+                    return categoria;
+                }
+                actual = actual->siguiente;
+            }
+        } while (!recorridoCompleto);
+        return categoria;
+    }
+}
+
+
+Categoria Categorias::Inicio()
+{
+    return *inicio;
+}
+
+Categoria Categorias::Final()
+{
+    return *final;
 }
 
 int Categorias::Modificar(string nombre)
