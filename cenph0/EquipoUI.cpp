@@ -492,6 +492,6 @@ void EquipoUI::listarEquiposPorHilera()
 
 	Equipos listaEquipos = gestorEquipos.listarEquipos();
 	string hileraC = leerHileraCaracteres();
-	Equipos listaOrdenadaHilera = listaEquipos.ListarEquiposBuscarHilera(hileraC);
+	Equipos listaOrdenadaHilera = listaEquipos.ListarEquiposBuscarNombre(hileraC);
 	listaOrdenadaHilera.Imprimir();
 }
