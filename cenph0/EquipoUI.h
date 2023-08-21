@@ -29,7 +29,8 @@ public:
 	Equipo leerDatosEquipo();
 	void registrarEquipo();
 	void modificarEquipo();
-	void alquilarEquiipo();
+	void alquilarEquipo();
+	void devolverEquipo();
 	void eliminarEquipo();
 	int leerOpcionParam();
 	int leerOpcionOrden();
