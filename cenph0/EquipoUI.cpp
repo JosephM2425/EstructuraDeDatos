@@ -80,7 +80,7 @@ void EquipoUI::menuEquipos(int opcion)
 	case 9:
 	{
 		auxiliarUI.encabezado();
-		alquilarEquiipo();
+		alquilarEquipo();
 	}
 	break;
 	case 10:
@@ -91,7 +91,6 @@ void EquipoUI::menuEquipos(int opcion)
 	break;
 	case 11:
 	{
-		auxiliarUI.menuGeneralCompleto();
 	}
 	break;
 	default:

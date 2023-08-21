@@ -1,1 +1,5 @@
-﻿  cenph0.vcxproj -> C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.exe
+﻿  EquipoUI.cpp
+AuxiliarUI.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/OPT:ICF'
+     Creando biblioteca C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.lib y objeto C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.exp
+EquipoUI.obj : error LNK2001: símbolo externo "public: class Equipos __cdecl Equipos::ListarEquiposBuscarHilera(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?ListarEquiposBuscarHilera@Equipos@@QEAA?AV1@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) sin resolver
+C:\Users\caria\OneDrive - Diagnostika\Documentos\U\CENFOTEC\8. Estructuras de Datos\Proyecto Final\Codigo\EstructuraDeDatos\cenph0\x64\Release\cenph0.exe : fatal error LNK1120: 1 externos sin resolver
